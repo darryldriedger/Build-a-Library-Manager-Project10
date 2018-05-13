@@ -1,14 +1,12 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title} poppa frita!
-  
-
+doctype html
+html
+  head
+    title Library Manager
+    link(rel='stylesheet', href='stylesheets/style.css')
   nav
     ul
       li
-        a(href='/books/all_books') Books
+        a(href='all_books.html') Books
       li
         a(href='all_patrons.html') Patrons
       li
