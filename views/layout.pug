@@ -4,5 +4,16 @@ html
     title= Books
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+  include includes/header.pug
+
+  block content
+    //- include home
+      //- include all_books
+      //- include book_detail
+      //- include checked_books
+      //- include overdue_books
+      //- include return_book
+      //- include all_loans
+  include includes/footer.pug
+    
     

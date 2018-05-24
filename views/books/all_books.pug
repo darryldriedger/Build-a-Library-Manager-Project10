@@ -1,14 +1,6 @@
-extends ./layout
+extends ../layout
 
-  nav
-    ul
-      li
-        a(href='all_books.html') Books
-      li
-        a(href='all_patrons.html') Patrons
-      li
-        a(href='all_loans.html') Loans
-  body
+block content
     h1 Books
     p
       a.button(href='new_book.html') Create New Book
