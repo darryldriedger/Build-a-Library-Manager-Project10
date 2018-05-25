@@ -17,6 +17,10 @@ router.get('/all_loans', function(req, res, next) {
 // router.get('/checked_books', function(req, res, next) {
 //   res.render('books/checked_books');
 // });
+router.get('/books/', (req, res)=>{
+  const name = req.cookies.username;
+    res.redirect('books/return_book);
+});
 
 
 module.exports = router;
