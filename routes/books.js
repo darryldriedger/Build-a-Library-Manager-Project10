@@ -9,6 +9,11 @@ var Books = require("../models").Books;
   |  /_ | |_/|| |  | |    | |_\\|  /_ | |_/\| \_/|| |/\||
   \____\\____/\_/  \_/    \____/\____\\____/\____/\_/  \|
 */
+//for new_book inputs
+//, name="title" value=books.title
+//, name="author" value=books.author
+//, name="genre" value=books.genre
+//, name="first_published" value=books.firstPublished
 
 /* _____          _
  / ____|        | |
@@ -35,12 +40,13 @@ router.get('/', function(req, res, next) {
  |_|      \___/  |___/  \__|
 
 *//* POST create article. */
-router.post('/', function(req, res, next) {
+router.post('/new_book', function(req, res, next) {
   Article.create(req.body).then(function(article) {
-    res.redirect("/articles/" + article.id);
+    res.redirect("/all_books");
   }).catch(function(error){
       if(error.name === "SequelizeValidationError") {
-        res.render("articles/new", {article: Article.build(req.body), errors: error.errors, title: "New Article"})
+        // res.render("articles/new", {article: Article.build(req.body), errors: error.errors, title: "New Article"})
+        console.log("error");
       } else {
         throw error;
       }

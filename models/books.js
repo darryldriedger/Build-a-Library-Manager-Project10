@@ -1,4 +1,6 @@
 'use strict';
+//var dateFormat = require('dateformat');
+
 module.exports = (sequelize, DataTypes) => {
   var Books = sequelize.define('Books', {
     id: {
@@ -10,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     genre: DataTypes.STRING,
     first_published: DataTypes.INTEGER
   }, {});
+
   Books.associate = function(models) {
     // associations can be defined here
   };

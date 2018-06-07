@@ -92,3 +92,9 @@ input {
 input[type=text], select {
   margin-left: 10px;
 }
+.insignia {
+    margin: 5em auto;
+    max-width: 24em;
+    /* filter: grayscale(90%); */
+    opacity: .9;
+}
