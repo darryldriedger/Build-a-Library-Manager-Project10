@@ -1,8 +1,12 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var connect = require('connect');
+var methodOverride = require('method-override');
+var moment = require('moment');
 
 // var indexRouter = require('./routes/index');
 var mainRoutes = require('./routes');

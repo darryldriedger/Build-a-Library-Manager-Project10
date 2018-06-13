@@ -6,14 +6,19 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect": "^3.6.6",
     "cookie-parser": "~1.4.3",
+    "dateformat": "^3.0.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "method-override": "^2.3.10",
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
     "sequelize": "^4.37.7",
     "sequelize-cli": "^4.0.0",
+    "serve-favicon": "^2.5.0",
     "sqlite3": "^4.0.0"
   },
   "main": "app.js",
