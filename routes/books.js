@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Books = require("../models").Books;
+var Books = require("../models").Book;
 
 
 /* _____ ____  _  _____    ____  _____ _     ____  _

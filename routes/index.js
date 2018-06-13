@@ -9,33 +9,47 @@ router.get('/', function(req, res, next) {
 //BOOKS
 //BOOKS
 //BOOKS
+          /* _____          _
+           / ____|        | |
+          | |  __    ___  | |_
+          | | |_ |  / _ \ | __|
+          | |__| | |  __/ | |_
+          \_____|  \___|  \__|
+          */
+          //* GET articles listing. */
+          // router.get('/books/all_books', function(req, res, next) {
+          //   Books.findAll({order: [["createdAt", "DESC"]]}).then(function(book){
+          //     res.render("/all_books", {book: book, title: "Darryls Awesome Blog" });
+          //   }).catch(function(error){
+          //       res.send(500, error);
+          //    });
+          // });
 
-          /*
-            _____                  _
-           |  __ \                | |
-           | |__) |   ___    ___  | |_
-           |  ___/   / _ \  / __| | __|
-           | |      | (_) | \__ \ | |_
-           |_|      \___/  |___/  \__|
+/*
+  _____                  _
+ |  __ \                | |
+ | |__) |   ___    ___  | |_
+ |  ___/   / _ \  / __| | __|
+ | |      | (_) | \__ \ | |_
+ |_|      \___/  |___/  \__|
 
-          *//* POST create article. */
-          router.post('/new_book', function(req, res, next) {
+*//* POST create article. */
+router.post('/new_book', function(req, res, next) {
+  Books.create(req.body).then(function(books) {
 
-            Books.create(req.body).then(function() {
-
-              console.log("posted new book");
-              res.redirect("/all_books");
-            }).catch(function(error){
-                if(error.name === "SequelizeValidationError") {
-                  // res.render("articles/new", {article: Article.build(req.body), errors: error.errors, title: "New Article"})
-                  console.log("error");
-                } else {
-                  throw error;
-                }
-            }).catch(function(error){
-                res.send(500, error);
-             });
-          ;});
+    console.log(books);
+    // res.redirect("/all_books");
+  }).catch(function(error){
+      if(error.name === "SequelizeValidationError") {
+        // res.render("articles/new", {article: Article.build(req.body), errors: error.errors, title: "New Article"})
+        console.log("error");
+      } else {
+        throw error;
+      }
+  }).catch(function(error){
+      res.send(500, error);
+   });
+;});
 
 router.get('/all_books', function(req, res, next) {
   res.render('books/all_books');
