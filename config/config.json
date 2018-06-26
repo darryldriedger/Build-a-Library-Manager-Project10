@@ -4,11 +4,11 @@
     "dialect": "sqlite"
   },
   "test": {
-    "storage": "test.db",
+    "storage": "library.db",
     "dialect": "sqlite"
   },
   "production": {
-    "storage": "production.db",
+    "storage": "library.db",
     "dialect": "sqlite"
   }
 }

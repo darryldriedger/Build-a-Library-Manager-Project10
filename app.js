@@ -9,9 +9,16 @@ var methodOverride = require('method-override');
 var moment = require('moment');
 
 // var indexRouter = require('./routes/index');
-var mainRoutes = require('./routes');
+// var mainRoutes = require('./routes');
 // var testRouter = require('./routes/all_books');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
+
+//====ROUTES===============================
+var homeRoute = require('./routes/index');
+var booksRoute = require('./routes/books');
+// var loansRoute = require('./routes/loans');
+// var patronsRoute = require('./routes/patrons');
+//====ROUTES===============================
 
 var app = express();
 
@@ -26,13 +33,24 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-app.use(mainRoutes);
+// app.use(mainRoutes);
 // app.use('/book_detail', testRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
+
+//====useROUTES===============================
+app.use('/', homeRoute);
+app.use('/books', booksRoute);
+// app.use('/loans', loansRoute);
+// app.use('/patrons', patronsRoute);
+//====useROUTES===============================
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  // next(createError(404));
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler
