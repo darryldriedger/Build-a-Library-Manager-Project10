@@ -13,12 +13,6 @@ var Patrons = require("../models").Patrons;
   |  /_ | |_/|| |  | |    | |_\\|  /_ | |_/\| \_/|| |/\||
   \____\\____/\_/  \_/    \____/\____\\____/\____/\_/  \|
 */
-//for new_book inputs
-//, name="title" value=books.title
-//, name="author" value=books.author
-//, name="genre" value=books.genre
-//, name="first_published" value=books.firstPublished
-
 
 //BOOKS
 //BOOKS
@@ -31,39 +25,34 @@ var Patrons = require("../models").Patrons;
 | |__| | |  __/ | |_
 \_____|  \___|  \__|
 */
-//* GET articles listing. */
 
-// router.get('/books', function(req, res, next) {
-//   res.render('books/books');
-// });
-
+//* GET Books listing. */
 router.get('/books', function(req, res, next) {
-  Book.findAll({order:'title'}).then(function(books){
-    // console.log("this is the start");
-    // console.log("this is the start");
-    console.log(books);
-    // console.log("this is the end");
-    res.render('books/books');
+  Book.findAll().then(function(books){
+    res.render('books',{books: books});
   }).catch(function(error){
       res.send(500, error);
    });
-});
 
-router.get('/', function(req, res, next) {
-  Book.findAll({order: 'title'}).then(function(booklistings){
-    if(booklistings){
-      res.render('partials/books', {
-        title: 'Books',
-        books: booklistings
-      });
-    } else {
-      err.status == 404;
-      return next (err);
-    }
-  }).catch(function(err){
-    return next(err);
-  });
-});
+ //   res.render('books/return_book');
+   router.get('/new_book', function(req, res, next) {
+     res.render('new_book');
+   });
+ //   res.render('books/overdue_books');
+   router.get('/overdue_books', function(req, res, next) {
+     res.render('overdue_books');
+   });
+ //   res.render('books/checked_books');
+   router.get('/checked_books', function(req, res, next) {
+     res.render('checked_books');
+   });
+//   res.render('books/book_detail');
+   router.get('/book_detail', function(req, res, next) {
+     res.render('book_detail');
+   });
+   router.get('/new_book', function(req, res, next) {
+     res.render('books/new_book');
+   });
 
 /*
   _____                  _
@@ -76,7 +65,6 @@ router.get('/', function(req, res, next) {
 *//* POST create article. */
 router.post('/books/new_book', function(req, res, next) {
   Book.create(req.body).then(function(book) {
-    console.log(req.body);
     res.redirect("/books");
   }).catch(function(error){
       if(error.name === "SequelizeValidationError") {
@@ -89,22 +77,6 @@ router.post('/books/new_book', function(req, res, next) {
       res.send(500, error);
    });
 ;});
-
-// router.get('/book_detail', function(req, res, next) {
-//   res.render('books/book_detail');
-// });
-// router.get('/checked_books', function(req, res, next) {
-//   res.render('books/checked_books');
-// });
-router.get('/new_book', function(req, res, next) {
-  res.render('books/new_book');
-});
-// router.get('/overdue_books', function(req, res, next) {
-//   res.render('books/overdue_books');
-// });
-// router.get('/return_book', function(req, res, next) {
-//   res.render('books/return_book');
-// });
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++

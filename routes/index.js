@@ -10,10 +10,35 @@ var Patrons = require("../models").Patrons;
 router.get('/', function(req, res, next) {
   res.render('index');//, { title: 'Library Manager Project 10' }
 });
-// router.get('/books/books', function(req, res, next) {
-//   res.render('books/books');//, { title: 'Library Manager Project 10' }
-// });
+/* _____          _
+ / ____|        | |
+| |  __    ___  | |_
+| | |_ |  / _ \ | __|
+| |__| | |  __/ | |_
+\_____|  \___|  \__|
+*/
+//* GET Books listing. */
+router.get('/books', function(req, res, next) {
+  Book.findAll().then(function(books){
+    res.render('books',{books: books});
+  }).catch(function(error){
+      res.send(500, error);
+   });
 
+
+});
+router.get('/new_book', function(req, res, next) {
+  res.render('new_book');
+});
+router.get('/overdue_books', function(req, res, next) {
+  res.render('overdue_books');
+});
+router.get('/checked_books', function(req, res, next) {
+  res.render('checked_books');
+});
+router.get('/book_detail', function(req, res, next) {
+  res.render('book_detail');
+});
 
 /*
   _____                  _
@@ -43,50 +68,40 @@ router.post('/new_book', function(req, res, next) {
       res.send(500, error);
    });
 ;});
-/* _____          _
- / ____|        | |
-| |  __    ___  | |_
-| | |_ |  / _ \ | __|
-| |__| | |  __/ | |_
-\_____|  \___|  \__|
-*/
-//* GET articles listing. */
 
-// router.get('/books', function(req, res, next) {
-//   res.render('books/books');
-// });
+// /*
+//  _____          _       _____               _   _
+// / ____|        | |     |_   _|             | | (_)
+// | |  __    ___  | |_      | |    _ __     __| |  _  __   __
+// | | |_ |  / _ \ | __|     | |   | '_ \   / _` | | | \ \ / /
+// | |__| | |  __/ | |_     _| |_  | | | | | (_| | | |  \ V /
+// \_____|  \___|  \__|   |_____| |_| |_|  \__,_| |_|   \_/
+// */
+// GET book details
+router.get('/:id', function(req, res, next) {
+  Book.findAll({
+    include: [{ model: Loan, include: [{ model: Patron }] }],
+    where: { id: req.params.id }
+  })
+  .then(function(bookdetails){
 
-router.get('/books', function(req, res, next) {
-  Book.findAll().then(function(books){
-    console.log("this is the start");
-    console.log("this is the start");
-    console.log("find the book");
-    console.log("this is the end");
-    res.render('books',{books: books});
-  }).catch(function(error){
-      res.send(500, error);
-   });
+    var loansdata = JSON.parse(JSON.stringify(bookdetails));
+
+    if (bookdetails) {
+      res.render('partials/bookdetail', {
+        title: 'Book Details',
+        book: loansdata[0],
+        loans: loansdata[0].Loans
+      });
+    } else {
+      err.status == 404;
+      return next(err);
+    }
+
+  }).catch(function(err){
+    return next(err);
+  });
 });
-router.get('/new_book', function(req, res, next) {
-  res.render('books/new_book');
-});
-// router.get('/', function(req, res, next) {
-//   Book.findAll({order: 'title'}).then(function(booklistings){
-//     if(booklistings){
-//       res.render('/books', {
-//         title: 'Books',
-//         books: booklistings
-//       });
-//     } else {
-//       err.status == 404;
-//       return next (err);
-//     }
-//   }).catch(function(err){
-//     return next(err);
-//   });
-// });
-
-
 
 
 
