@@ -12,6 +12,7 @@ block content
     table
       thead
         tr
+          th Id
           th Title
           th Author
           th Genre
@@ -19,8 +20,10 @@ block content
       tbody
         each book in books
           tr
+            td #{book.id}
             td
-              a(href='/books/' + book.id) #{book.title}
+              //- a(href='/book_detail') #{book.title}
+              a(href='/book_detail/' + book.id) #{book.title}
             td #{book.author}
             td #{book.genre}
             td #{book.first_published}
