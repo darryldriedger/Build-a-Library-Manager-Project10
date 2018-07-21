@@ -33,17 +33,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     first_published: DataTypes.INTEGER
   }, {
-    classMethods: {
-      associate: function(models) {
-        Book.hasMany(models.Loan, {foreignKey: 'book_id'});
-      }
-    },
-    timestamps: false
+    // classMethods: {
+    //   associate: function(models) {
+    //     Book.hasMany(models.Loan, {foreignKey: 'book_id'});
+    //   }
+    // },
+    // timestamps: false
 
   });
 
-  // Book.associate = function(models) {
-  //   // associations can be defined here
-  // };
+  Book.associate = function(models) {
+    // associations can be defined here
+  };
   return Book;
 };

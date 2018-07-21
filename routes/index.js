@@ -8,8 +8,21 @@ var Book = require("../models").Book;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');//, { title: 'Library Manager Project 10' }
+  res.render('index');
 });
+
+
+//BOOKS
+//BOOKS
+//BOOKS
+
+/* _____          _
+ / ____|        | |
+| |  __    ___  | |_
+| | |_ |  / _ \ | __|
+| |__| | |  __/ | |_
+\_____|  \___|  \__|
+*/
 /* _____          _
  / ____|        | |
 | |  __    ___  | |_
@@ -40,6 +53,44 @@ router.get('/book_detail', function(req, res, next) {
   res.render('book_detail');
 });
 
+
+//* GET Books listing. */
+// router.get('/books', function(req, res, next) {
+//   Book.findAll().then(function(books){
+//     res.render('books',{books: books});
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// ;});
+//  //   res.render('books/return_book');
+//    router.get('/new_book', function(req, res, next) {
+//      res.render('new_book');
+//    });
+//  //   res.render('books/overdue_books');
+//    router.get('/overdue_books', function(req, res, next) {
+//      res.render('overdue_books');
+//    });
+//  //   res.render('books/checked_books');
+//    router.get('/checked_books', function(req, res, next) {
+//      res.render('checked_books');
+//    });
+// //   res.render('books/book_detail');
+//    router.get('/book_detail', function(req, res, next) {
+//      res.render('book_detail');
+//    });
+//    router.get('/new_book', function(req, res, next) {
+//      res.render('books/new_book');
+//    });
+
+/*
+  _____                  _
+ |  __ \                | |
+ | |__) |   ___    ___  | |_
+ |  ___/   / _ \  / __| | __|
+ | |      | (_) | \__ \ | |_
+ |_|      \___/  |___/  \__|
+
+*//* POST create article. */
 /*
   _____                  _
  |  __ \                | |
@@ -63,6 +114,22 @@ router.post('/new_book', function(req, res, next) {
       res.send(500, error);
    });
 ;});
+
+// router.post('/books/new_book', function(req, res, next) {
+//   Book.create(req.body).then(function(book) {
+//     res.redirect("/books");
+//   }).catch(function(error){
+//       if(error.name === "SequelizeValidationError") {
+//         // res.render("articles/new", {article: Article.build(req.body), errors: error.errors, title: "New Article"})
+//         console.log("error");
+//       } else {
+//         throw error;
+//       }
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// ;});
+
 
 /*
  _____            _
@@ -97,12 +164,14 @@ router.put('/book_detail/:id', function(req, res, next){
     return book.update(req.body);
   }).then(function(book){
   console.log(book.id);
-    res.redirect('/book_detail' + '/' + book.id);
+    // res.redirect('/book_detail' + '/' + book.id);
+    res.redirect('/book_detail/' + book.id);
   }).catch(function(error){
       console.log("there is a huge 500 error here");
       res.send(500, error);
    });
 });
+
 // /*
 //  _____          _       _____               _   _
 // / ____|        | |     |_   _|             | | (_)
@@ -157,6 +226,9 @@ router.get('/book_detail/:id', function(req, res, next) {
       res.send(500, error);
    });
 });
+
+
+
 
 
 

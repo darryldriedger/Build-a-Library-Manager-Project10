@@ -63,3 +63,5 @@ An error is displayed if the form is submitted with blank or invalid data in req
 Uses Sequelize model validation for validating your from fields, and not just HTML5 built in validation.
 
 etc...
+
+##notes
