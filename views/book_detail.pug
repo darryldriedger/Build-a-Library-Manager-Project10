@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Book: #{bookDetail.title}
-  form(action='/book_detail/' + bookDetail.id + '?_method=PUT', method='post')
+  form(action='/books/' + bookDetail.id + '?_method=PUT', method='post')
     p
       label(for='title') Title
       input#title(type='text', value=bookDetail.title)

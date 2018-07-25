@@ -3,10 +3,10 @@ extends layout
 block content
     h1 Books
     p
-      a.button(href='/new_book') Create New Book
+      a.button(href='/books/new_book') Create New Book
     p
       | Filters
-      a(href='all_books.html')  All |
+      a(href='/books')  All |
       a(href='overdue_books.html') Overdue |
       a(href='checked_books.html') Checked Out  
     table
@@ -23,7 +23,7 @@ block content
             td #{book.id}
             td
               //- a(href='/book_detail') #{book.title}
-              a(href='/book_detail/' + book.id) #{book.title}
+              a(href='/books/' + book.id) #{book.title}
             td #{book.author}
             td #{book.genre}
             td #{book.first_published}
