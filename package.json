@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "start-dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -21,7 +22,6 @@
     "serve-favicon": "^2.5.0",
     "sqlite3": "^4.0.0"
   },
-  "main": "app.js",
   "devDependencies": {
     "nodemon": "^1.18.3"
   },

@@ -1,6 +1,4 @@
 'use strict';
-//var dateFormat = require('dateformat');
-
 module.exports = (sequelize, DataTypes) => {
   var Book = sequelize.define('Book', {
     // id: {

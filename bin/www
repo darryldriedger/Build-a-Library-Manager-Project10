@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('libmanagproj10:server');
 var http = require('http');
-var sequelize = require("../models").sequelize;
+var sequelize = require('../models').sequelize;
 /**
  * Get port from environment and store in Express.
  */
