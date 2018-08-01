@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new_book', function(req, res, next) {
-  res.render('new_book');
+  res.render('books/new_book');
 });
 router.get('/overdue_books', function(req, res, next) {
   res.render('overdue_books');
@@ -55,7 +55,7 @@ router.put('/:id', function(req, res, next){
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
   Book.findById(req.params.id).then(function(book){
-    res.render('book_detail',{book: book});
+    res.render('books/book_detail',{book: book});
   }).catch(function(error){
       res.send(500, error);
    });

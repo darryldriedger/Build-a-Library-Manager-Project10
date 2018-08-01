@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var connect = require('connect');
 var methodOverride = require('method-override');
-// var moment = require('moment');
 
 // var indexRouter = require('./routes/index');
 // var mainRoutes = require('./routes');
