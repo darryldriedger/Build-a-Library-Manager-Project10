@@ -6,22 +6,17 @@ var Book = require("../models").Book;
 var Loans = require("../models").Loans;
 var Patrons = require("../models").Patrons;
 
-
 router.get('/', function(req, res, next) {
   Book.findAll().then(function(books){
-    res.render('loans');
+    res.render('patrons');
   }).catch(function(error){
       res.send(500, error);
    });
 });
-// router.get('/checked_loans', function(req, res, next) {
-//   res.render('loans/checked_loans');
+// router.get('/new_patron', function(req, res, next) {
+//   res.render('patrons/new_patron');
 // });
-// router.get('/new_loan', function(req, res, next) {
-//   res.render('loans/new_loan');
+// router.get('/patron_detail', function(req, res, next) {
+//   res.render('patrons/patron_detail');
 // });
-// router.get('/overdue_loans', function(req, res, next) {
-//   res.render('loans/overdue_loans');
-// });
-
 module.exports = router;
