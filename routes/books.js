@@ -24,10 +24,6 @@ router.get('/overdue_books', function(req, res, next) {
 router.get('/checked_books', function(req, res, next) {
   res.render('checked_books');
 });
-// router.get('/book_detail', function(req, res, next) {
-//   // console.log("one");
-//   res.render('book_detail');
-// });
 
 /* POST create article. POST POST POST POST POST */
 router.post('/new_book', function(req, res, next) {
