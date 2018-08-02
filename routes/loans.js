@@ -3,8 +3,8 @@
 var express = require('express');
 var router = express.Router();
 var Book = require("../models").Book;
-var Loans = require("../models").Loans;
-var Patrons = require("../models").Patrons;
+var Loan = require("../models").Loan;
+var Patron = require("../models").Patron;
 
 
 router.get('/', function(req, res, next) {

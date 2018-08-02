@@ -1,7 +1,7 @@
 {
   "development": {
     "dialect": "sqlite",
-    "storage": "library.db",
+    "storage": "development_db.db",
     "operatorsAliases": false
   },
   "test": {
