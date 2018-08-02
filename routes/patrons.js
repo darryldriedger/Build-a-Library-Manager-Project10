@@ -47,4 +47,15 @@ router.get('/:id', function(req, res, next) {
       res.send(500, error);
    });
 });
+/* PUT Edit/change book details. PUT PUT PUT PUT PUT  */
+router.put('/:id', function(req, res, next){
+  Patron.findById(req.params.id).then(function(patron){
+    return patron.update(req.body);
+  }).then(function(patron){
+    res.redirect('/patrons/' + patron.id);
+  }).catch(function(error){
+      console.log("there is a huge 500 error here");
+      res.status(500).send(error);
+   });
+});
 module.exports = router;
