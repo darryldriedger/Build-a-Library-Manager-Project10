@@ -3,14 +3,8 @@ extends ../layout
 block content
     h1 Loans
     p
-      a.button(href='new_loan.html') Create New Loan
-    p
-      | Filters
-      a(href='all_loans.html') All
-      |
-      a(href='overdue_loans.html') Overdue
-      |
-      a(href='checked_loans.html') Checked Out
+      a.button(href='loans/new_loan') Create New Loan
+    include ../includes/filters 
     table
       thead
         tr
