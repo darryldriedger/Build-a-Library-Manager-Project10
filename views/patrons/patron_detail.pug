@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    h1 Patron: Andrew Chalkley
+    h1 Patron:  #{patron.first_name} #{patron.last_name}
     form(action='/patrons/' + patron.id + '?_method=PUT', method='post')
       p
         label(for='first_name') First Name

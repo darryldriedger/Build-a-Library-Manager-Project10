@@ -19,10 +19,10 @@ router.get('/new_book', function(req, res, next) {
   res.render('books/new_book');
 });
 router.get('/overdue_books', function(req, res, next) {
-  res.render('overdue_books');
+  res.render('books/overdue_books');
 });
 router.get('/checked_books', function(req, res, next) {
-  res.render('checked_books');
+  res.render('books/checked_books');
 });
 
 /* POST create article. POST POST POST POST POST */

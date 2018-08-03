@@ -10,9 +10,19 @@ module.exports = (sequelize, DataTypes) => {
     loaned_on: DataTypes.DATE,
     return_by: DataTypes.DATE,
     returned_on: DataTypes.DATE
-  }, {});
-  Loan.associate = function(models) {
-    // associations can be defined here
-  };
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    },
+    instanceMethods: {
+      // instances can be defined here
+    }
+  });
+
+  // Loan.associate = function(models) {
+  //   // associations can be defined here
+  // };
   return Loan;
 };

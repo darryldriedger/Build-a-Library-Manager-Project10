@@ -11,9 +11,19 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     library_id: DataTypes.STRING,
     zip_code: DataTypes.INTEGER
-  }, {});
-  Patron.associate = function(models) {
-    // associations can be defined here
-  };
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+      }
+    },
+    instanceMethods: {
+      // instances can be defined here
+    }
+  });
+
+  // Patron.associate = function(models) {
+  //   // associations can be defined here
+  // };
   return Patron;
 };

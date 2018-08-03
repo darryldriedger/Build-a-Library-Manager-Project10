@@ -4,11 +4,7 @@ block content
     h1 Books
     p
       a.button(href='books/new_book') Create New Book
-    p
-      | Filters
-      a(href='/books')  All |
-      a(href='overdue_books.html') Overdue |
-      a(href='checked_books.html') Checked Out  
+    include ../includes/filters 
     table
       thead
         tr
