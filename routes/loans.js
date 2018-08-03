@@ -14,14 +14,14 @@ router.get('/', function(req, res, next) {
       res.send(500, error);
    });
 });
-// router.get('/checked_loans', function(req, res, next) {
-//   res.render('loans/checked_loans');
-// });
+router.get('/checked_loans', function(req, res, next) {
+  res.render('loans/checked_loans');
+});
 router.get('/new_loan', function(req, res, next) {
   res.render('loans/new_loan');
 });
-// router.get('/overdue_loans', function(req, res, next) {
-//   res.render('loans/overdue_loans');
-// });
+router.get('/overdue_loans', function(req, res, next) {
+  res.render('loans/overdue_loans');
+});
 
 module.exports = router;
