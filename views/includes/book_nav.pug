@@ -1,5 +1,7 @@
 p
-  | Filters
-  a(href='/books')  All |
-  a(href='overdue_books.html')  Overdue |
-  a(href='checked_books.html')  Checked Out  
+  a.button(href='/books/new_book') Create New Book
+p
+| Filters
+a(href='/books')  All |
+a(href='/books/overdue_books')  Overdue |
+a(href='/books/checked_books')  Checked Out  
