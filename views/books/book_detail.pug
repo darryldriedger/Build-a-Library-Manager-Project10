@@ -16,25 +16,35 @@ block content
       label(for='first_published') First Published
       input#first_published(type='text' name='first_published' value=book.first_published)
     p
-      input(type='submit' value='Update')
-  //- h2 Loan History
-  //- table
-  //-   thead
-  //-     tr
-  //-       th Book
-  //-       th Patron
-  //-       th Loaned on
-  //-       th Return by
-  //-       th Returned on
-  //-       th Action
-  //-   tbody
-  //-     tr
-  //-       td
-  //-         a(href='book_detail.html') A Brief History of Time
-  //-       td
-  //-         a(href='patron_detail.html') Andrew Chalkley
-  //-       td 2015-12-12
-  //-       td 2015-12-19
-  //-       td
-  //-       td
-  //-         a.button(href='return_book.html') Return Book
+      input(type='submit' value='Update')      
+  h2 Loan History
+  table
+    thead
+      tr
+        th Book
+        th Patron
+        th Loaned on
+        th Return by
+        th Returned on
+        th Action
+    tbody
+      tr
+        td
+          a(href='/books/book_detail') A Brief History of Time
+        td
+          a(href='/patrons/patron_detail') Andrew Chalkley
+        td 2015-12-12
+        td 2015-12-19
+        td
+        td
+          a.button(href='/books/return_book') Return Book
+    //- tbody
+    //-   each took in book
+    //-     tr
+    //-       td #{took.id}
+    //-       td
+    //-         a(href='/books/' + took.id) #{took.title}
+    //-       td #{took.author}
+    //-       td #{took.genre}
+    //-       td #{took.first_published}
+    //-       td Action

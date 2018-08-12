@@ -63,13 +63,48 @@ router.put('/:id', function(req, res, next){
 });
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
+// router.get('/:id', function(req, res, next) {
+//   Book.findById(req.params.id).then(function(book){
+//     res.render('books/book_detail',{book: book});
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// });
+
+//-------------------------------------------------------------
+/* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
-  Book.findById(req.params.id).then(function(book){
+  Book.findAll({
+    include: [Loan],
+    where: {id: req.params.id}
+  })
+    .then(function(book){
     res.render('books/book_detail',{book: book});
+    // res.send(JSON.stringify(book));
+    // res.send("this is great!");
+    console.log(JSON.stringify(book));
   }).catch(function(error){
       res.send(500, error);
+      // res.send("this is great!");
+      // res.status(500).send(body);
    });
 });
-
-
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+// // GET book details
+// router.get('/:id', function(req, res, next) {
+//   Book.findAll({
+//     include: [Loan]
+//   })
+//   .then(function(book){
+//
+//     console.log(JSON.stringify(book));
+// console.log("this working?");
+//       // console.log(book);
+//       // res.render('books/book_detail',{book: book});
+//   }).catch(function(error){
+//         console.log(error);
+//      });
+// });
+//-------------------------------------------------------------
 module.exports = router;

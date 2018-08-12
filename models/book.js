@@ -1,15 +1,15 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
   var Book = sequelize.define('Book', {
     // id: {
-    //     type: DataTypes.INTEGER,
-    //     primaryKey: true
+    //   type: DataTypes.INTEGER,
+    //   primaryKey: true
     // },
     title: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Title is required"
+          msg: "Please enter a title"
         }
       }
     },
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Author is required"
+          msg: "Please enter an author"
         }
       }
     },
@@ -25,25 +25,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Genre is required"
+          msg: "Please enter a genre"
         }
       }
     },
     first_published: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-        Book.hasMany(models.Loan, {foreignKey: 'book_id'});
-      }
-    },
-    instanceMethods: {
-      // instances can be defined here
-    }
   });
 
-  // Book.associate = function(models) {
-  //   // associations can be defined here
-  // };
+  Book.associate = function(models) {
+    // associations can be defined here
+    Book.hasMany(models.Loan, {foreignKey: 'book_id'});
+  };
   return Book;
 };
