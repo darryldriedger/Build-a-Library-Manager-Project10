@@ -5,11 +5,14 @@ var router = express.Router();
 var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
-
+var moment = require('moment');
 
 router.get('/', function(req, res, next) {
-  Book.findAll().then(function(books){
-    res.render('loans');
+  Loan.findAll({
+    include: [{ all: true }]
+  }).then(function(loans){
+    res.render('loans',{loans: loans});
+    // res.send(loans);
   }).catch(function(error){
       res.send(500, error);
    });
@@ -28,6 +31,8 @@ router.get('/overdue_loans', function(req, res, next) {
 router.get('/new_loan', function(req, res, next) {
   var books;
   var patrons;
+  var currentDate = moment().format('YYYY/MM/DD');
+  var returnDate = moment().add(7, 'd').format('l');
 
   Book.findAll().then(function(results){
     books = results;
@@ -37,7 +42,10 @@ router.get('/new_loan', function(req, res, next) {
     }).then(function(){
       res.render('loans/new_loan', {
         books: books,
-        patrons: patrons});
+        patrons: patrons,
+        cDate: currentDate,
+        rDate: returnDate
+      });
     }).catch(function(err){
       return next(err);
     })
@@ -55,5 +63,27 @@ router.put('/:id', function(req, res, next){
       res.status(500).send(error);
    });
 });
+
+/* POST create article. POST POST POST POST POST */
+router.post('/new_loan', function(req, res, next) {
+  Loan.create(req.body).then(function(loan) {
+    res.redirect("/loans");
+  }).catch(function(error){
+      if(error.name === "SequelizeValidationError") {
+        console.log("error");
+      } else {
+        throw error;
+      }
+  }).catch(function(error){
+      res.send(500, error);
+   });
+;});
+
+
+
+
+
+
+
 
 module.exports = router;

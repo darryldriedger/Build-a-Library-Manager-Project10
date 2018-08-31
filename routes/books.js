@@ -19,6 +19,10 @@ router.get('/new_book', function(req, res, next) {
   res.render('books/new_book',{title: 'New Book'});
 });
 
+router.get('/return_book', function(req, res, next) {
+  res.render('books/return_book',{title: 'Return Book'});
+});
+
 router.get('/overdue_books', function(req, res, next) {
   Book.findAll().then(function(books){
     res.render('books/overdue_books',{books: books,title: 'Overdue Books'});
@@ -75,36 +79,30 @@ router.put('/:id', function(req, res, next){
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
   Book.findAll({
-    include: [Loan],
-    where: {id: req.params.id}
+    include: [{ model: Loan, include: [{ model: Patron }] }],
+  where: {id: req.params.id}
   })
-    .then(function(book){
-    res.render('books/book_detail',{book: book});
-    // res.send(JSON.stringify(book));
+    .then(function(data){
+      // var result  = JSON.parse(book);
+      var bookInfo = JSON.parse(JSON.stringify(data));
+      let book = bookInfo[0];
+      let loans = book.Loans;
+    res.render('books/book_detail',{
+      book: book,
+      loans: loans
+    });
+    // res.send(book)
+    // res.send(loans[0].Patron)
+    // res.send(patron)
+    // res.send(book[0].loans)
+    // res.send(JSON.parse(book));
     // res.send("this is great!");
-    console.log(JSON.stringify(book));
+    // console.log(JSON.stringify(book));
   }).catch(function(error){
       res.send(500, error);
       // res.send("this is great!");
       // res.status(500).send(body);
    });
 });
-//-------------------------------------------------------------
-//-------------------------------------------------------------
-// // GET book details
-// router.get('/:id', function(req, res, next) {
-//   Book.findAll({
-//     include: [Loan]
-//   })
-//   .then(function(book){
-//
-//     console.log(JSON.stringify(book));
-// console.log("this working?");
-//       // console.log(book);
-//       // res.render('books/book_detail',{book: book});
-//   }).catch(function(error){
-//         console.log(error);
-//      });
-// });
 //-------------------------------------------------------------
 module.exports = router;

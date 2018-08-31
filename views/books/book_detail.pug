@@ -28,16 +28,17 @@ block content
         th Returned on
         th Action
     tbody
-      tr
-        td
-          a(href='/books/book_detail') A Brief History of Time
-        td
-          a(href='/patrons/patron_detail') Andrew Chalkley
-        td 2015-12-12
-        td 2015-12-19
-        td
-        td
-          a.button(href='/books/return_book') Return Book
+      each loan in loans
+        tr
+          td
+            a(href='/books/' + book.id) #{book.title}
+          td
+            a(href='/patrons/' + loan.Patron) #{loan.Patron.first_name} #{loan.Patron.last_name}
+          td #{loan.loaned_on}
+          td #{loan.return_by}
+          td #{loan.returned_on}
+          td
+            a.button(href='/books/return_book') Return Book
     //- tbody
     //-   each took in book
     //-     tr

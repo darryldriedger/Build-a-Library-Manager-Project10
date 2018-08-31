@@ -16,11 +16,11 @@ block content
         each loan in loans
           tr
             td
-              a(href='/loans/' + loan.id) #{loan.book_id}
+              a(href='/books/' + loan.Book.id) #{loan.Book.title}
             td
-              a(href='/patrons/' + loan.id) #{loan.patron_id}
+              a(href='/patrons/' + loan.Patron.id) #{loan.Patron.first_name} #{loan.Patron.last_name}
             td #{loan.loaned_on}
             td #{loan.return_by}
             td #{loan.returned_on}
             td
-              a.button(href='/books/return_book') Return Book
+              a.button(href='/books/') Return Book

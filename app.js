@@ -6,11 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var connect = require('connect');
 var methodOverride = require('method-override');
+var moment = require('moment');
 
-// var indexRouter = require('./routes/index');
-// var mainRoutes = require('./routes');
-// var testRouter = require('./routes/all_books');
-// var usersRouter = require('./routes/users');
+// app.locals.moment = require('moment');
 
 //====ROUTES===============================
 var homeRoute = require('./routes/index');
