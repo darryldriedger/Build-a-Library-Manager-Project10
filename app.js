@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var connect = require('connect');
 var methodOverride = require('method-override');
 var moment = require('moment');
+// const Op = Sequelize.Op;
 
 // app.locals.moment = require('moment');
 
