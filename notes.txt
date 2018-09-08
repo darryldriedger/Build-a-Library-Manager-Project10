@@ -1,0 +1,20 @@
+()New Book : done ;
+List all: pagination, filters have to be added ;
+List overdue: pagination, filters ;
+List checked out: pagination, filters ;
+Return book: work on update route for returned on;
+Book detail: pagination for loans
+
+()New Patron: done ;
+List All: pagination ;
+
+()New Loan: done ;
+List all: pagination, filters ;
+List overdue: pagination, filters ;
+List checked out: pagination, filters ;
+
+Nav: add searchBar to nav, ; 
+Other
+-----
+ - render time in a shorter format
+ - if books have been returned , the return book button should not be rendered
