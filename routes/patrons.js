@@ -40,13 +40,53 @@ router.post('/new_patron', function(req, res, next) {
 ;});
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
+// router.get('/:id', function(req, res, next) {
+//   Patron.findById(req.params.id).then(function(patron){
+//     // res.render('patrons/patron_detail',{patron: patron});
+//     res.send(patron);
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// });
+
+
+//-------------------------------------------------------------
+/* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
-  Patron.findById(req.params.id).then(function(patron){
-    res.render('patrons/patron_detail',{patron: patron});
+  Patron.findAll({
+    include: [{ model: Loan, include: [{ model: Book }] }],
+  where: {id: req.params.id}
+  })
+    .then(function(data){
+      // var result  = JSON.parse(book);
+      var patronInfo = JSON.parse(JSON.stringify(data));
+      let patron = patronInfo[0];
+      let loans = patron.Loans;
+      // let book = loans[0].Book;
+    res.render('patrons/patron_detail',{
+      patron: patron,
+      loans: loans,
+      // book: book,
+    });
+        // res.send(bookInfo);
+        // res.send(loans);
+        // res.send(patron);
+    // res.send(book);
+    // res.send(loans[0].Patron);
+    // res.send(book[0].loans);
+    // res.send(JSON.parse(book));
+    // res.send("this is great!");
+    // console.log(JSON.stringify(book));
   }).catch(function(error){
       res.send(500, error);
+      // res.send("this is great!");
+      // res.status(500).send(body);
    });
 });
+//-------------------------------------------------------------
+
+
+
 /* PUT Edit/change book details. PUT PUT PUT PUT PUT  */
 router.put('/:id', function(req, res, next){
   Patron.findById(req.params.id).then(function(patron){
