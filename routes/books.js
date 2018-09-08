@@ -5,6 +5,8 @@ var router = express.Router();
 var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
+var moment = require('moment');
+// const Op = Sequelize.Op;
 
 //* GET all Books listings. GET GET GET GET GET */
 router.get('/', function(req, res, next) {
@@ -13,14 +15,6 @@ router.get('/', function(req, res, next) {
   }).catch(function(error){
       res.send(500, error);
    });
-});
-
-router.get('/new_book', function(req, res, next) {
-  res.render('books/new_book',{title: 'New Book'});
-});
-
-router.get('/return_book', function(req, res, next) {
-  res.render('books/return_book',{title: 'Return Book'});
 });
 
 router.get('/overdue_books', function(req, res, next) {
@@ -32,11 +26,21 @@ router.get('/overdue_books', function(req, res, next) {
 });
 
 router.get('/checked_books', function(req, res, next) {
-  Book.findAll().then(function(books){
+  Loan.findAll({
+    include: [{ all: true }],
+      where: {
+      returned_on: null
+    }
+  }).then(function(books){
     res.render('books/checked_books',{books: books,title: 'Checked Out Books'});
+    // res.send(books);
   }).catch(function(error){
       res.send(500, error);
    });
+});
+
+router.get('/new_book', function(req, res, next) {
+  res.render('books/new_book',{title: 'New Book'});
 });
 
 /* POST create article. POST POST POST POST POST */
@@ -60,6 +64,7 @@ router.put('/:id', function(req, res, next){
     return book.update(req.body);
   }).then(function(book){
     res.redirect('/books/' + book.id);
+    // res.send(req.body);
   }).catch(function(error){
       console.log("there is a huge 500 error here");
       res.status(500).send(error);
@@ -83,7 +88,6 @@ router.get('/:id', function(req, res, next) {
   where: {id: req.params.id}
   })
     .then(function(data){
-      // var result  = JSON.parse(book);
       var bookInfo = JSON.parse(JSON.stringify(data));
       let book = bookInfo[0];
       let loans = book.Loans;
@@ -91,17 +95,8 @@ router.get('/:id', function(req, res, next) {
       book: book,
       loans: loans
     });
-    // res.send(book)
-    // res.send(loans[0].Patron)
-    // res.send(patron)
-    // res.send(book[0].loans)
-    // res.send(JSON.parse(book));
-    // res.send("this is great!");
-    // console.log(JSON.stringify(book));
   }).catch(function(error){
       res.send(500, error);
-      // res.send("this is great!");
-      // res.status(500).send(body);
    });
 });
 //-------------------------------------------------------------
