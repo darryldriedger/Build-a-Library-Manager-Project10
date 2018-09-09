@@ -18,3 +18,5 @@ Other
 -----
  - render time in a shorter format
  - if books have been returned , the return book button should not be rendered
+ - pagination through the sequelize calls
+ -

@@ -33,19 +33,10 @@ block content
           td
             a(href='/books/' + book.id) #{book.title}
           td
-            a(href='/patrons/' + loan.Patron) #{loan.Patron.first_name} #{loan.Patron.last_name}
+            a(href='/patrons/' + loan.Patron.id) #{loan.Patron.first_name} #{loan.Patron.last_name}
           td #{loan.loaned_on}
           td #{loan.return_by}
           td #{loan.returned_on}
           td
-            a.button(href='/books/return_book') Return Book
-    //- tbody
-    //-   each took in book
-    //-     tr
-    //-       td #{took.id}
-    //-       td
-    //-         a(href='/books/' + took.id) #{took.title}
-    //-       td #{took.author}
-    //-       td #{took.genre}
-    //-       td #{took.first_published}
-    //-       td Action
+            if (loan.returned_on === null)
+              a.button(href='/loans/return_book/' + loan.id) Return Book
