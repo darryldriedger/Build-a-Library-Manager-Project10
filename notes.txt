@@ -13,10 +13,9 @@ List all: pagination, filters ;
 List overdue: pagination, filters ;
 List checked out: pagination, filters ;
 
-Nav: add searchBar to nav, ; 
+Nav: add searchBar to nav, ;
 Other
 -----
  - render time in a shorter format
- - if books have been returned , the return book button should not be rendered
  - pagination through the sequelize calls
- -
+ - worked on checked out books and loans
