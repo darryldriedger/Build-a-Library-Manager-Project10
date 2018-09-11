@@ -18,6 +18,10 @@ a.button, input[type=submit] {
   font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
+  margin-right: 5px
+}
+.resetButton {
+  margin-left: 5px;
 }
 form a.button, input[type=submit] {
   margin-left: 140px;
@@ -90,7 +94,7 @@ input {
   border-color: #E7E7E7;
 }
 input[type=text], select {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .insignia {
     margin: 5em auto;
