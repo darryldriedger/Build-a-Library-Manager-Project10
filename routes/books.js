@@ -9,13 +9,86 @@ var moment = require('moment');
 // const Op = Sequelize.Op;
 
 //* GET all Books listings. GET GET GET GET GET */
+// router.get('/', function(req, res, next) {
+//   Book.findAll().then(function(books){
+//     res.render('books',{books: books,title: 'Books'});
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// });
 router.get('/', function(req, res, next) {
-  Book.findAll().then(function(books){
-    res.render('books',{books: books,title: 'Books'});
+  //the limit of loans per page
+  let limit = 5;
+  // This will set the page number according to the page reference in the parameters
+  let page = req.params.page;
+  // Sets the offset accordint to the page that is being chosen
+  let offset = limit * (page - 1);
+  Book.findAndCountAll({
+    offset: 0,
+    limit: limit
+  // Loan.findAndCountAll()
+  // Loan.count()
+  })
+  .then(function(result){
+    let books = result.rows;
+    let pages = Math.ceil(result.count / limit);
+    let link = 'books/booksPages/';
+    // res.send(loans);
+    console.log(page);
+    console.log(pages);
+        // res.send(result);
+          res.render('books',{
+            title: 'Books',
+            books: books,
+            pages: pages,
+            link: link
+          });
   }).catch(function(error){
       res.send(500, error);
    });
 });
+//
+// //----------------------------------------
+// //----------------------------------------
+// //----------------------------------------
+
+router.get('/booksPages/:page', function(req, res, next) {
+  //the limit of loans per page
+  let limit = 5;
+  // This will set the page number according to the page reference in the parameters
+  let page = req.params.page;
+  // Sets the offset accordint to the page that is being chosen
+  let offset = limit * (page - 1);
+  Book.findAndCountAll({
+    offset: offset,
+    limit: limit
+  // Loan.findAndCountAll()
+  // Loan.count()
+  })
+  .then(function(result){
+    let books = result.rows;
+    let pages = Math.ceil(result.count / limit);
+    let link = 'books/booksPages/';
+    // res.send(loans);
+    console.log(page);
+    console.log(pages);
+        // res.send("Math");
+          res.render('books',{
+            title: 'Books',
+            books: books,
+            pages: pages,
+            link: link
+          });
+  }).catch(function(error){
+      res.send(500, error);
+   });
+});
+//-----------------------------------------------------
+//-----------------------------------------------------
+//-----------------------------------------------------
+//-----------------------------------------------------
+
+
 
 router.get('/overdue_books', function(req, res, next) {
   Book.findAll().then(function(books){

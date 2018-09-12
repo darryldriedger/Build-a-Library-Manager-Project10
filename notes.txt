@@ -14,8 +14,8 @@ List overdue: pagination, filters ;
 List checked out: pagination, filters ;
 
 Nav: add searchBar to nav, ;
+
 Other
 -----
  - render time in a shorter format
- - pagination through the sequelize calls
- - worked on checked out books and loans
+ - work on the overdue tabs of the books and Loans

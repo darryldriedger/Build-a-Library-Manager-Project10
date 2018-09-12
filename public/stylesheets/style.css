@@ -20,6 +20,19 @@ a.button, input[type=submit] {
   cursor: pointer;
   margin-right: 5px
 }
+/* a.active{
+  color: #019875;
+  background: white;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 14px;
+  border-style: solid;
+  border-radius: 2px;
+  border-color: #019875;
+  border-width: 1px;
+  cursor: pointer;
+  margin-right: 5px
+} */
 .resetButton {
   margin-left: 5px;
 }

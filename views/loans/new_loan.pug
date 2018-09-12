@@ -7,7 +7,8 @@ block content
         label(for='book_id') Book
         select#book_id(name='book_id')
           each book in books
-            option(value=book.id) #{book.title}
+            if(1 === 1)
+              option(value=book.id) #{book.title}
       p
         label(for='patron_id') Patron
         select#patron_id(name='patron_id')
@@ -24,3 +25,6 @@ block content
 
 //-  value='Sun May 22 2016 17:00:00 GMT-0700 (PDT)'
 //- value='Sun May 29 2016 17:00:00 GMT-0700 (PDT)'
+//- td
+//-   if (loan.returned_on === null)
+//-     a.button(href='/loans/return_book/' + loan.id) Return Book
