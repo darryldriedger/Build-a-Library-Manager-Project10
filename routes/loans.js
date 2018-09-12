@@ -115,27 +115,30 @@ router.get('/new_loan', function(req, res, next) {
   var books;
   var patrons;
   var currentDate = moment().format('YYYY/MM/DD');
-  var returnDate = moment().add(7, 'd').format('YYYY-MM-DD');
+  var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
+
   Book.findAll({
-    include: [{ all: true }]
-  }).then(function(results){
-    books = results;
-  }).then( Patron.findAll()
-   ).then( function(results){
+    include: [{ all: true }]})
+    .then(function(results){
+      books = results;
+    }).then(
+    Patron.findAll({
+      include: [{ all: true }]
+    }).then( function(results){
       patrons = results;
-  }).then(function(){
+    }).then(function(){
       res.render('loans/new_loan', {
         books: books,
         patrons: patrons,
         cDate: currentDate,
         rDate: returnDate
       });
-      // res.send(books);
+      // res.send(patrons);
     })
     // .catch(function(err){
     //   return next(err);
     // })
-  // );
+  );
 });
 
 /* POST create article. POST POST POST POST POST */
