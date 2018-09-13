@@ -5,23 +5,68 @@ var router = express.Router();
 var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
+  //the limit of loans per page
+let limit = 5;
 
 router.get('/', function(req, res, next) {
-  Patron.findAll().then(function(patrons){
-    res.render('patrons',{patrons: patrons});
+  // This will set the page number according to the page reference in the parameters
+  let page = req.params.page;
+  // Sets the offset accordint to the page that is being chosen
+  let offset = limit * (page - 1);
+  Patron.findAndCountAll({
+    offset: 0,
+    limit: limit
+  })
+  .then(function(result){
+    let patrons = result.rows;
+    let pages = Math.ceil(result.count / limit);
+    let link = 'patrons/patronsPages/';
+        // res.send(patrons);
+          res.render('patrons',{
+            title: 'Patrons',
+            patrons: patrons,
+            pages: pages,
+            link: link
+          });
   }).catch(function(error){
       res.send(500, error);
    });
 });
-// router.get('/new_patron', function(req, res, next) {
-//   res.render('patrons/new_patron');
-// });
-// router.get('/patron_detail', function(req, res, next) {
-//   res.render('patrons/patron_detail');
-// });
+
+router.get('/patronsPages/:page', function(req, res, next) {
+  // This will set the page number according to the page reference in the parameters
+  let page = req.params.page;
+  // Sets the offset accordint to the page that is being chosen
+  let offset = limit * (page - 1);
+  Patron.findAndCountAll({
+    offset: offset,
+    limit: limit
+  })
+  .then(function(result){
+    let patrons = result.rows;
+    let pages = Math.ceil(result.count / limit);
+    let link = 'patrons/patronsPages/';
+  // res.send(patrons);
+    res.render('patrons',{
+      title: 'Patrons',
+      patrons: patrons,
+      pages: pages,
+      link: link,
+      activePage: page
+    });
+  }).catch(function(error){
+      res.send(500, error);
+   });
+});
+
+
+
+
+
+
 
 router.get('/new_patron', function(req, res, next) {
-  res.render('patrons/new_patron');
+  res.render('patrons/new_patron',{title: 'New Patron'});
 });
 
 /* POST create article. POST POST POST POST POST */

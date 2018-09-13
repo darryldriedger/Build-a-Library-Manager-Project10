@@ -7,7 +7,7 @@ var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 var moment = require('moment');
 // const Op = Sequelize.Op;
-
+let limit = 4;
 //* GET all Books listings. GET GET GET GET GET */
 // router.get('/', function(req, res, next) {
 //   Book.findAll().then(function(books){
@@ -18,7 +18,7 @@ var moment = require('moment');
 // });
 router.get('/', function(req, res, next) {
   //the limit of loans per page
-  let limit = 5;
+  // let limit = 5;
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
   // Sets the offset accordint to the page that is being chosen
@@ -54,7 +54,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/booksPages/:page', function(req, res, next) {
   //the limit of loans per page
-  let limit = 5;
+  // let limit = 5;
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
   // Sets the offset accordint to the page that is being chosen

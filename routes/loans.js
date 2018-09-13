@@ -6,10 +6,12 @@ var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 var moment = require('moment');
+//Below is the limit of results per page
+let limit = 10;
 
 router.get('/', function(req, res, next) {
   //the limit of loans per page
-  let limit = 6;
+  // let limit = 6;
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
   // Sets the offset accordint to the page that is being chosen
@@ -42,7 +44,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/loansPages/:page', function(req, res, next) {
   //the limit of loans per page
-  let limit = 6;
+  // let limit = 6;
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
   // Sets the offset accordint to the page that is being chosen

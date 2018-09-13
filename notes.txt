@@ -19,3 +19,6 @@ Other
 -----
  - render time in a shorter format
  - work on the overdue tabs of the books and Loans
+ - change the loans js code for the newloans page route
+ - work on highlighting the active page button
+ - maybe include patron_nav and book_nav in the same pug file
