@@ -6,7 +6,8 @@ var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 var moment = require('moment');
-// const Op = Sequelize.Op;
+const Sequelize = require('sequelize');
+const op = Sequelize.Op;
 let limit = 4;
 //* GET all Books listings. GET GET GET GET GET */
 // router.get('/', function(req, res, next) {

@@ -6,6 +6,8 @@ var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 var moment = require('moment');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 //Below is the limit of results per page
 let limit = 10;
 
@@ -91,8 +93,18 @@ router.get('/checked_loans', function(req, res, next) {
 });
 
 router.get('/overdue_loans', function(req, res, next) {
+  // var currentDate = new Date();
+  var currentDate = moment();
   Loan.findAll({
-    include: [{ all: true }]
+    include: [{ all: true }],
+    where: {
+      return_by: {
+      [Op.lt]: currentDate
+      },
+      returned_on: {
+        [Op.eq]: null
+      }
+    }
   }).then(function(loans){
     res.render('loans/overdue_loans',{loans: loans});
     // res.send(loans);

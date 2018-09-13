@@ -2,16 +2,16 @@
   "development": {
     "dialect": "sqlite",
     "storage": "library2.db",
-    "operatorsAliases": false
+    "operatorsAliases": true
   },
   "test": {
     "dialect": "sqlite",
     "storage": "test.db",
-    "operatorsAliases": false
+    "operatorsAliases": true
   },
   "production": {
     "dialect": "sqlite",
     "storage": "production.db",
-    "operatorsAliases": false
+    "operatorsAliases": true
   }
 }
