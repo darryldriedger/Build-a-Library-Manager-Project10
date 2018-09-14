@@ -156,7 +156,7 @@ router.put('/:id', function(req, res, next){
   Book.findById(req.params.id).then(function(book){
     return book.update(req.body);
   }).then(function(book){
-    res.redirect('/books/' + book.id);
+    res.redirect('/books/');
     // res.send(req.body);
   }).catch(function(error){
       console.log("there is a huge 500 error here");
@@ -193,4 +193,7 @@ router.get('/:id', function(req, res, next) {
    });
 });
 //-------------------------------------------------------------
+
+
+
 module.exports = router;

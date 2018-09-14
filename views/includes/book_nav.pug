@@ -8,3 +8,9 @@ p
 a(href='/books')  All |
 a(href='/books/overdue_books')  Overdue |
 a(href='/books/checked_books')  Checked Out 
+script.
+      var textInputElement = document.getElementById('search');
+      textInputElement.addEventListener('keyup', function(){
+      var text = textInputElement.value;
+      console.log('New text is "' + text + '"');
+      });
