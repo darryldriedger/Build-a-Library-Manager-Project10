@@ -6,7 +6,7 @@ var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 const Sequelize = require('sequelize');
-const op = Sequelize.Op;
+const Op = Sequelize.Op;
   //the limit of loans per page
 let limit = 5;
 

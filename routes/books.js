@@ -7,7 +7,7 @@ var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 var moment = require('moment');
 const Sequelize = require('sequelize');
-const op = Sequelize.Op;
+const Op = Sequelize.Op;
 let limit = 4;
 //* GET all Books listings. GET GET GET GET GET */
 // router.get('/', function(req, res, next) {
@@ -48,10 +48,6 @@ router.get('/', function(req, res, next) {
       res.send(500, error);
    });
 });
-//
-// //----------------------------------------
-// //----------------------------------------
-// //----------------------------------------
 
 router.get('/booksPages/:page', function(req, res, next) {
   //the limit of loans per page
@@ -84,20 +80,15 @@ router.get('/booksPages/:page', function(req, res, next) {
       res.send(500, error);
    });
 });
-//-----------------------------------------------------
-//-----------------------------------------------------
-//-----------------------------------------------------
-//-----------------------------------------------------
 
 
 
-router.get('/overdue_books', function(req, res, next) {
-  Book.findAll().then(function(books){
-    res.render('books/overdue_books',{books: books,title: 'Overdue Books'});
-  }).catch(function(error){
-      res.send(500, error);
-   });
-});
+
+
+
+
+
+
 
 router.get('/checked_books', function(req, res, next) {
   Loan.findAll({
@@ -112,6 +103,34 @@ router.get('/checked_books', function(req, res, next) {
       res.send(500, error);
    });
 });
+
+router.get('/overdue_books', function(req, res, next) {
+var currentDate = moment();
+Loan.findAll({
+  include: [{ all: true }],
+  where: {
+    return_by: {
+    [Op.lt]: currentDate
+    },
+    returned_on: {
+      [Op.eq]: null
+    }
+  }
+  }).then(function(books){
+    res.render('books/overdue_books',{books: books,title: 'Overdue Books'});
+// res.send(books);
+  }).catch(function(error){
+      res.send(500, error);
+   });
+});
+
+
+
+
+
+
+
+
 
 router.get('/new_book', function(req, res, next) {
   res.render('books/new_book',{title: 'New Book'});
