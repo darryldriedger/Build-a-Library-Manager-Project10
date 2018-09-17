@@ -1,25 +1,40 @@
-()New Book : done ;
-List all: pagination, filters have to be added ;
+--------------------------------------------------()New Book : done ;
+List all: filters have to be added ;
 List overdue: pagination, filters ;
 List checked out: pagination, filters ;
 Return book: work on update route for returned on;
 Book detail: pagination for loans
 
-()New Patron: done ;
+--------------------------------------------------()New Patron: done ;
 List All: pagination ;
 
-()New Loan: done ;
+--------------------------------------------------()New Loan: done ;
 List all: pagination, filters ;
 List overdue: pagination, filters ;
 List checked out: pagination, filters ;
 
-Nav: add searchBar to nav, ;
 
 Other
 -----
  - render time in a shorter format
- - work on the overdue tabs of the books and Loans
  - change the loans js code for the newloans page route
  - work on highlighting the active page button
  - maybe include patron_nav and book_nav in the same pug file
  - pagination for all Pages
+ - there is a problem when i go back a page after  creating a new loan and then create the same loan
+ - error handling and form field error handling
+
+
+ERROR/BUG FIXING
+-----
+
+ - Dont allow creating the same book name
+ - handle the issue of being able to go back to the create loan page and creating another empty loans
+ - Dont allow the same Patron id to be used when creating a new patron_nav
+ - Books overdue does not link to book details page properly
+
+
+ NOTES
+ -----
+
+ library2 database is the original database witouth the loan_status column in books table

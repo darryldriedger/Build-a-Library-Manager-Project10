@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
     // res.send(loans);
     console.log(page);
     console.log(pages);
-        // res.send("Math");
+        // res.send(loans);
           res.render('loans',{
             title: 'Loans',
             loans: loans,
@@ -113,6 +113,40 @@ router.get('/overdue_loans', function(req, res, next) {
    });
 });
 
+// router.get('/new_loan', function(req, res, next) {
+//   var books;
+//   var patrons;
+//   var currentDate = moment().format('YYYY/MM/DD');
+//   var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
+//
+//   Book.findAll({
+//     include: [{ all: true }]})
+//     .then(function(results){
+//       books = results;
+//     }).then(
+//     Patron.findAll({
+//       include: [{ all: true }]
+//     }).then( function(results){
+//       patrons = results;
+//     }).then(function(){
+//       // res.render('loans/new_loan', {
+//       //   books: books,
+//       //   patrons: patrons,
+//       //   cDate: currentDate,
+//       //   rDate: returnDate
+//       // });
+//       res.send(books);
+//     })
+//     // .catch(function(err){
+//     //   return next(err);
+//     // })
+//   );
+// });
+
+//==========================================
+//==========================================
+//==========================================
+
 router.get('/new_loan', function(req, res, next) {
   var books;
   var patrons;
@@ -120,7 +154,13 @@ router.get('/new_loan', function(req, res, next) {
   var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
 
   Book.findAll({
-    include: [{ all: true }]})
+    include: [{ all: true }],
+    where:{
+      loan_status: {
+       [Op.eq]: null
+      }
+    }
+  })
     .then(function(results){
       books = results;
     }).then(
@@ -135,19 +175,52 @@ router.get('/new_loan', function(req, res, next) {
         cDate: currentDate,
         rDate: returnDate
       });
-      // res.send(patrons);
+      // res.send(books);
     })
     // .catch(function(err){
     //   return next(err);
     // })
   );
 });
+//==========================================
+//==========================================
+//==========================================
 
 /* POST create article. POST POST POST POST POST */
+// router.post('/new_loan', function(req, res, next) {
+//   Loan.create(req.body).then(function(loan) {
+//     // res.redirect("/loans");
+//     // res.redirect('new_loan');
+//     res.send(req.body);
+//
+//   }).catch(function(error){
+//       if(error.name === "SequelizeValidationError") {
+//         console.log("error");
+//       } else {
+//         throw error;
+//       }
+//   }).catch(function(error){
+//       res.send(500, error);
+//    });
+// });
+
+
+
+
 router.post('/new_loan', function(req, res, next) {
   Loan.create(req.body).then(function(loan) {
+    Book.findById(req.body.book_id).then(function(book){
+      return book.update({loan_status: "not null"},{
+        where:{id: req.body.book_id}
+      });
+    })
     // res.redirect("/loans");
-    res.redirect('new_loan');
+    // res.redirect('new_loan');
+    // res.send(req.body);
+
+  }).then(function(){
+    // res.send(req.body)
+    res.redirect("/loans");
   }).catch(function(error){
       if(error.name === "SequelizeValidationError") {
         console.log("error");
@@ -157,7 +230,8 @@ router.post('/new_loan', function(req, res, next) {
   }).catch(function(error){
       res.send(500, error);
    });
-;});
+});
+
 
 router.get('/return_book/:id', function(req, res, next) {
 
@@ -185,17 +259,73 @@ router.get('/return_book/:id', function(req, res, next) {
 });
 
 
+// router.put('/return_book/:id', function(req, res, next){
+//   Loan.findById(req.params.id).then(function(loan){
+//     return loan.update(req.body);
+//   }).then(function(loan){
+//     res.redirect('/loans/');
+//     // res.send(req.body);
+//   }).catch(function(error){
+//       console.log("there is a huge 500 error here");
+//       res.status(500).send(error);
+//    });
+// });
+
+//==========================================
+//==========================================
+//==========================================
+
+// router.put('/return_book/:id', function(req, res, next){
+//   Loan.findById(req.params.id).then(function(loan){
+//     Book.findById(req.body.book_id).then(function(book){
+//       book.update({loan_status: "not null"},{
+//         where:{id: req.body.book_id}
+//       });
+//     });
+//     // return loan.update(req.body);
+//   }).then(function(loan){
+//     res.redirect('/loans/');
+//     // res.send(req.body);
+//   }).catch(function(error){
+//       console.log("there is a huge 500 error here");
+//       res.status(500).send(error);
+//    });
+// });
+
+// router.put('/return_book/:id', function(req, res, next){
+//     Book.findById(req.body.book_id).then(function(book){
+//       return book.update({loan_status: null},{
+//         where:{id: req.body.book_id}
+//       });
+//   }).then(function(loan){
+//     res.redirect('/loans/');
+//     // res.send(req.body);
+//   }).catch(function(error){
+//       console.log("there is a huge 500 error here");
+//       res.status(500).send(error);
+//    });
+// });
+
+
 router.put('/return_book/:id', function(req, res, next){
   Loan.findById(req.params.id).then(function(loan){
+    Book.findById(loan.book_id).then(function(book){
+      return book.update({loan_status: null},{
+        where:{id: req.body.book_id}
+      });
+    })
     return loan.update(req.body);
   }).then(function(loan){
     res.redirect('/loans/');
-    // res.send(req.body);
+    // res.send(loan);
   }).catch(function(error){
       console.log("there is a huge 500 error here");
       res.status(500).send(error);
    });
 });
+//==========================================
+//==========================================
+//==========================================
 
 
 // /* PUT Edit/change book details. PUT PUT PUT PUT PUT  */

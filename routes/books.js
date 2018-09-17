@@ -8,7 +8,7 @@ var Patron = require("../models").Patron;
 var moment = require('moment');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-let limit = 4;
+let limit = 5;
 //* GET all Books listings. GET GET GET GET GET */
 // router.get('/', function(req, res, next) {
 //   Book.findAll().then(function(books){
@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
     // res.send(loans);
     console.log(page);
     console.log(pages);
-        // res.send(result);
+        // res.send(books);
           res.render('books',{
             title: 'Books',
             books: books,

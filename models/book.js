@@ -29,7 +29,15 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     },
-    first_published: DataTypes.INTEGER
+    first_published: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Please enter a genre"
+        }
+      }
+    },
+    loan_status: DataTypes.STRING
   });
 
   Book.associate = function(models) {
