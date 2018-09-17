@@ -5,23 +5,26 @@ block content
     form( method="post")
       p
         label(for='book_id') Book
-        select#book_id(name='book_id')
-          each book in books
-            if(1 === 1)
-              option(value=book.id) #{book.title}
-      p
-        label(for='patron_id') Patron
-        select#patron_id(name='patron_id')
-          each patron in patrons
-            option(value=patron.id) #{patron.first_name} #{patron.last_name}
-      p
-        label(for='loaned_on') Loaned on:
-        input#loaned_on(type='text' name='loaned_on' value= cDate)
-      p
-        label(for='return_by') Return by:
-        input#return_by(type='text' name='return_by' value= rDate)
-      p
-        input(type='submit', value='Create New Loan')
+        if numBooks == 0
+          p There are no books available to be loaned out
+        else  
+          select#book_id(name='book_id')
+            each book in books
+              if(1 === 1)
+                option(value=book.id) #{book.title}
+          p
+            label(for='patron_id') Patron
+            select#patron_id(name='patron_id')
+              each patron in patrons
+                option(value=patron.id) #{patron.first_name} #{patron.last_name}
+          p
+            label(for='loaned_on') Loaned on:
+            input#loaned_on(type='text' name='loaned_on' value= cDate)
+          p
+            label(for='return_by') Return by:
+            input#return_by(type='text' name='return_by' value= rDate)
+          p
+            input(type='submit', value='Create New Loan')
 
 //-  value='Sun May 22 2016 17:00:00 GMT-0700 (PDT)'
 //- value='Sun May 29 2016 17:00:00 GMT-0700 (PDT)'

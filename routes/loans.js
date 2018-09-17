@@ -148,7 +148,7 @@ router.get('/overdue_loans', function(req, res, next) {
 //==========================================
 
 router.get('/new_loan', function(req, res, next) {
-  var books;
+  var books, numBooks;
   var patrons;
   var currentDate = moment().format('YYYY/MM/DD');
   var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
@@ -163,6 +163,8 @@ router.get('/new_loan', function(req, res, next) {
   })
     .then(function(results){
       books = results;
+      numBooks = books.length;
+      console.log(numBooks);
     }).then(
     Patron.findAll({
       include: [{ all: true }]
@@ -171,6 +173,7 @@ router.get('/new_loan', function(req, res, next) {
     }).then(function(){
       res.render('loans/new_loan', {
         books: books,
+        numBooks: numBooks,
         patrons: patrons,
         cDate: currentDate,
         rDate: returnDate
