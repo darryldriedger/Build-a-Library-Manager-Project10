@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
     let loans = result.rows;
     let pages = Math.ceil(result.count / limit);
     let link = 'loans/loansPages/';
-    // res.send(loans);
+    // res.send(result);
     console.log(page);
     console.log(pages);
         // res.send(loans);

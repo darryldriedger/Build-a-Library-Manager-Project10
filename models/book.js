@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     first_published: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       validate: {
         notEmpty: {
           msg: "Please enter a genre"

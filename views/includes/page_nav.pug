@@ -1,5 +1,6 @@
-p
-  | Page |   
-  -for(var i = 1; i < pages + 1; i++) {
-      a(class='button' href='/' + link + i ) #{i}
-  -}
+if pages > 0
+  p
+    | Page |   
+    -for(var i = 1; i < pages + 1; i++) {
+        a(class='button' href='/' + link + i ) #{i}
+    -}

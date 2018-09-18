@@ -9,6 +9,7 @@ var moment = require('moment');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 let limit = 5;
+let pageId = 'books';
 //* GET all Books listings. GET GET GET GET GET */
 // router.get('/', function(req, res, next) {
 //   Book.findAll().then(function(books){
@@ -36,10 +37,11 @@ router.get('/', function(req, res, next) {
     let link = 'books/booksPages/';
     // res.send(loans);
     console.log(page);
-    console.log(pages);
+    console.log(pageId);
         // res.send(books);
           res.render('books',{
             title: 'Books',
+            pageId: pageId,
             books: books,
             pages: pages,
             link: link
@@ -68,10 +70,11 @@ router.get('/booksPages/:page', function(req, res, next) {
     let link = 'books/booksPages/';
     // res.send(loans);
     console.log(page);
-    console.log(pages);
+    console.log(pageId);
         // res.send("Math");
           res.render('books',{
             title: 'Books',
+            pageId: pageId,
             books: books,
             pages: pages,
             link: link
@@ -81,6 +84,19 @@ router.get('/booksPages/:page', function(req, res, next) {
    });
 });
 
+router.get('/search/:query', function(req, res, next) {
+  var query = req.params.query;
+    Book.findAll({
+        where: {
+        title: {
+          [Op.like]: '%' + query + '%'
+        }
+      }
+    }).then(function(books){
+      res.render('books',{books: books,title: 'Searched books'});
+      // res.send(books);
+    })
+});
 
 
 

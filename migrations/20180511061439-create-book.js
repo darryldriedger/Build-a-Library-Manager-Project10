@@ -23,6 +23,9 @@ module.exports = {
       first_published: {
         type: Sequelize.INTEGER
       },
+      loan_status: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

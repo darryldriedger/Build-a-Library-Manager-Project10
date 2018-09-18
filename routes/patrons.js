@@ -9,6 +9,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
   //the limit of loans per page
 let limit = 5;
+let pageId = 'patrons'
 
 router.get('/', function(req, res, next) {
   // This will set the page number according to the page reference in the parameters
@@ -26,6 +27,7 @@ router.get('/', function(req, res, next) {
         // res.send(patrons);
           res.render('patrons',{
             title: 'Patrons',
+            pageId: pageId,
             patrons: patrons,
             pages: pages,
             link: link
@@ -51,6 +53,7 @@ router.get('/patronsPages/:page', function(req, res, next) {
   // res.send(patrons);
     res.render('patrons',{
       title: 'Patrons',
+      pageId: pageId,
       patrons: patrons,
       pages: pages,
       link: link,
@@ -61,7 +64,19 @@ router.get('/patronsPages/:page', function(req, res, next) {
    });
 });
 
-
+router.get('/search/:query', function(req, res, next) {
+  var query = req.params.query;
+    Patron.findAll({
+        where: {
+        first_name: {
+          [Op.like]: '%' + query + '%'
+        }
+      }
+    }).then(function(patrons){
+      res.render('patrons',{patrons: patrons,title: 'Searched patrons'});
+      // res.send(books);
+    })
+});
 
 
 

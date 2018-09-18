@@ -1,0 +1,18 @@
+script.
+      const searchInput = document.getElementById('search');
+      const searchButton = document.getElementById('searchButton');
+      
+      //- textInputElement.addEventListener('keyup', function(){
+      //- var text = searchInput.value;
+      //- var urlPath = `/patrons/search/${text}`
+      //- window.history.pushState({"html":text,"pageTitle":"searching patrons"},"", urlPath);
+      //- console.log("/patrons/search/" + text);
+      //- });
+      
+      searchButton.addEventListener('click', function(){
+      var text = searchInput.value;
+      var urlPath = `/patrons/search/${text}`
+      window.history.pushState({"html":text,"pageTitle":"searching patrons"},"", urlPath);
+      window.history.go();
+      console.log("/patrons/search/" + text);
+      });

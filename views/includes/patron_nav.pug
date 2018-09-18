@@ -2,4 +2,10 @@ h1 #{title}
 p
   a.button(href='/patrons/new_patron') Create New Patron
   input#search(type='text', placeholder='Search Patrons ..')
-  button.resetButton Reset
+  button#searchButton Search
+  script.
+        var textInputElement = document.getElementById('search');
+        textInputElement.addEventListener('keyup', function(){
+        var text = textInputElement.value;
+        console.log('New text is "' + text + '"');
+        });

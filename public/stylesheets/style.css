@@ -20,7 +20,7 @@ a.button, input[type=submit] {
   cursor: pointer;
   margin-right: 5px
 }
-.resetButton {
+#searchButton {
   margin-left: 5px;
 }
 form a.button, input[type=submit] {
