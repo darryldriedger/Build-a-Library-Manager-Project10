@@ -9,6 +9,17 @@ script.
       //- console.log("/patrons/search/" + text);
       //- });
       
+      searchInput.addEventListener('keypress', function(e){
+      var key = e.which || e.keyCode;
+      if (key === 13) { 
+      var text = searchInput.value;
+      var urlPath = `/books/search/${text}`
+      window.history.pushState({"html":text,"pageTitle":"searching books"},"", urlPath);
+      window.history.go();
+      console.log("/books/search/" + text);
+      }
+      });
+      
       searchButton.addEventListener('click', function(){
       var text = searchInput.value;
       var urlPath = `/patrons/search/${text}`

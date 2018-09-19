@@ -1,12 +1,12 @@
 --------------------------------------------------()New Book : done ; BUG - NOT ALLOW SAME BOOK NAME ?
-List all: search
+-----List all: search
 List overdue: pagination, search ;
 List checked out: pagination, search ;
 
 
 
 --------------------------------------------------()New Patron: done ; BUG - NOT ALLOW TWO OF THE SAME PATRON ID#
-List All: search;
+-----List All: search;
 
 --------------------------------------------------()New Loan: done ; BUG - NOT ALLOW BACK PAGE AND CREATE EMPTY LOAN
 --------------------------------------------------()List all: done;
@@ -21,7 +21,9 @@ Other
  - error handling and form field error handling
  - reset will set the search field to blank and then reload the books index page
  - reload when going back to new book or loan
- 
+ - finish the searches code
+ - finish the pagination code
+
 ERROR/BUG FIXING
 -----
 
@@ -29,7 +31,7 @@ ERROR/BUG FIXING
  - handle the issue of being able to go back to the create loan page and creating another empty loans
  - Dont allow the same Patron id to be used when creating a new patron_nav
  - Time needs to be in another format!!!
-
+ - BUG in search if field is empty
 
 
  NOTES
