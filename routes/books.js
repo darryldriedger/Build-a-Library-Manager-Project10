@@ -87,10 +87,12 @@ router.get('/booksPages/:page', function(req, res, next) {
 router.get('/search/:query', function(req, res, next) {
   var query = req.params.query;
     Book.findAll({
-        where: {
-        title: {
-          [Op.like]: '%' + query + '%'
-        }
+      where: {
+        $or: [
+          { 'title': { [Op.like]: '%' + query + '%' } },
+          { 'author': { [Op.like]: '%' + query + '%' } },
+          { 'genre': { [Op.like]: '%' + query + '%' } }
+        ]
       }
     }).then(function(books){
       res.render('books',{books: books,title: 'Searched books'});

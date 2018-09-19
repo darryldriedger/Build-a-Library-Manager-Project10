@@ -1,25 +1,19 @@
 script.
+      //script for search field listeners
       const searchInput = document.getElementById('search');
       const searchButton = document.getElementById('searchButton');
-      
-      //- textInputElement.addEventListener('keyup', function(){
-      //- var text = searchInput.value;
-      //- var urlPath = `/patrons/search/${text}`
-      //- window.history.pushState({"html":text,"pageTitle":"searching patrons"},"", urlPath);
-      //- console.log("/patrons/search/" + text);
-      //- });
-      
+      //event listener to trigger when the enter key is pressed      
       searchInput.addEventListener('keypress', function(e){
       var key = e.which || e.keyCode;
       if (key === 13) { 
       var text = searchInput.value;
-      var urlPath = `/books/search/${text}`
-      window.history.pushState({"html":text,"pageTitle":"searching books"},"", urlPath);
+      var urlPath = `/patrons/search/${text}`
+      window.history.pushState({"html":text,"pageTitle":"searching patrons"},"", urlPath);
       window.history.go();
-      console.log("/books/search/" + text);
+      console.log("/patrons/search/" + text);
       }
       });
-      
+      //event listener to trigger when the search button is clicked      
       searchButton.addEventListener('click', function(){
       var text = searchInput.value;
       var urlPath = `/patrons/search/${text}`

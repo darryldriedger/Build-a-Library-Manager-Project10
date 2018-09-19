@@ -23,6 +23,7 @@ Other
  - reload when going back to new book or loan
  - finish the searches code
  - finish the pagination code
+ - place focus on input field for search field
 
 ERROR/BUG FIXING
 -----
