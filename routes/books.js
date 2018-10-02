@@ -6,39 +6,21 @@ var Book = require("../models").Book;
 var Loan = require("../models").Loan;
 var Patron = require("../models").Patron;
 var moment = require('moment');
-const Sequelize = require('sequelize');
+var Sequelize = require('sequelize');
+
 const Op = Sequelize.Op;
 let limit = 5;
 let pageId = 'books';
-//* GET all Books listings. GET GET GET GET GET */
-// router.get('/', function(req, res, next) {
-//   Book.findAll().then(function(books){
-//     res.render('books',{books: books,title: 'Books'});
-//   }).catch(function(error){
-//       res.send(500, error);
-//    });
-// });
+
 router.get('/', function(req, res, next) {
-  //the limit of loans per page
-  // let limit = 5;
-  // This will set the page number according to the page reference in the parameters
-  let page = req.params.page;
-  // Sets the offset accordint to the page that is being chosen
-  let offset = limit * (page - 1);
   Book.findAndCountAll({
     offset: 0,
     limit: limit
-  // Loan.findAndCountAll()
-  // Loan.count()
   })
   .then(function(result){
     let books = result.rows;
     let pages = Math.ceil(result.count / limit);
     let link = 'books/booksPages/';
-    // res.send(loans);
-    console.log(page);
-    console.log(pageId);
-        // res.send(books);
           res.render('books',{
             title: 'Books',
             pageId: pageId,
@@ -52,26 +34,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/booksPages/:page', function(req, res, next) {
-  //the limit of loans per page
-  // let limit = 5;
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
-  // Sets the offset accordint to the page that is being chosen
+  // Sets the offset according to the page that is being chosen
   let offset = limit * (page - 1);
   Book.findAndCountAll({
     offset: offset,
     limit: limit
-  // Loan.findAndCountAll()
-  // Loan.count()
   })
   .then(function(result){
     let books = result.rows;
     let pages = Math.ceil(result.count / limit);
     let link = 'books/booksPages/';
-    // res.send(loans);
-    console.log(page);
-    console.log(pageId);
-        // res.send("Math");
           res.render('books',{
             title: 'Books',
             pageId: pageId,
@@ -91,7 +65,8 @@ router.get('/search/:query', function(req, res, next) {
         $or: [
           { 'title': { [Op.like]: '%' + query + '%' } },
           { 'author': { [Op.like]: '%' + query + '%' } },
-          { 'genre': { [Op.like]: '%' + query + '%' } }
+          { 'genre': { [Op.like]: '%' + query + '%' } },
+          { 'first_published': { [Op.like]: '%' + query + '%' } }
         ]
       }
     }).then(function(books){
@@ -99,14 +74,6 @@ router.get('/search/:query', function(req, res, next) {
       // res.send(books);
     })
 });
-
-
-
-
-
-
-
-
 
 router.get('/checked_books', function(req, res, next) {
   Loan.findAll({
@@ -123,7 +90,7 @@ router.get('/checked_books', function(req, res, next) {
 });
 
 router.get('/overdue_books', function(req, res, next) {
-var currentDate = moment();
+var currentDate = moment().format('YYYY-MM-DD').toString();
 Loan.findAll({
   include: [{ all: true }],
   where: {
@@ -141,14 +108,6 @@ Loan.findAll({
       res.send(500, error);
    });
 });
-
-
-
-
-
-
-
-
 
 router.get('/new_book', function(req, res, next) {
   res.render('books/new_book',{title: 'New Book'});
@@ -183,16 +142,6 @@ router.put('/:id', function(req, res, next){
 });
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
-// router.get('/:id', function(req, res, next) {
-//   Book.findById(req.params.id).then(function(book){
-//     res.render('books/book_detail',{book: book});
-//   }).catch(function(error){
-//       res.send(500, error);
-//    });
-// });
-
-//-------------------------------------------------------------
-/* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
   Book.findAll({
     include: [{ model: Loan, include: [{ model: Patron }] }],
@@ -210,7 +159,6 @@ router.get('/:id', function(req, res, next) {
       res.send(500, error);
    });
 });
-//-------------------------------------------------------------
 
 
 

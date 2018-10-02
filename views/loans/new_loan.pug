@@ -19,10 +19,10 @@ block content
                 option(value=patron.id) #{patron.first_name} #{patron.last_name}
           p
             label(for='loaned_on') Loaned on:
-            input#loaned_on(type='text' name='loaned_on' value= cDate)
+            input#loaned_on(type='text' name='loaned_on' value= loaned_on)
           p
             label(for='return_by') Return by:
-            input#return_by(type='text' name='return_by' value= rDate)
+            input#return_by(type='text' name='return_by' value= return_by)
           p
             input(type='submit', value='Create New Loan')
 

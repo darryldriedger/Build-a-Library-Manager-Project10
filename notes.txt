@@ -1,12 +1,12 @@
 --------------------------------------------------()New Book : done ; BUG - NOT ALLOW SAME BOOK NAME ?
------List all: search
+--------------------------------------------------()List all: search; BUG - empty search error
 List overdue: pagination, search ;
 List checked out: pagination, search ;
 
 
 
 --------------------------------------------------()New Patron: done ; BUG - NOT ALLOW TWO OF THE SAME PATRON ID#
------List All: search;
+--------------------------------------------------()List All: search; BUG - empty search error
 
 --------------------------------------------------()New Loan: done ; BUG - NOT ALLOW BACK PAGE AND CREATE EMPTY LOAN
 --------------------------------------------------()List all: done;
@@ -31,7 +31,6 @@ ERROR/BUG FIXING
  - Dont allow creating the same book name
  - handle the issue of being able to go back to the create loan page and creating another empty loans
  - Dont allow the same Patron id to be used when creating a new patron_nav
- - Time needs to be in another format!!!
  - BUG in search if field is empty
 
 
@@ -39,3 +38,5 @@ ERROR/BUG FIXING
  -----
 
  library2 database is the original database witouth the loan_status column in books table
+ library4 database was working before i changed the dateonly parameter in the model
+ *remember - date only fixed my date problem

@@ -66,26 +66,23 @@ router.get('/patronsPages/:page', function(req, res, next) {
 
 router.get('/search/:query', function(req, res, next) {
   var query = req.params.query;
-      Patron.findAll({
-        where: {
-          $or: [
-            { 'first_name': { [Op.like]: '%' + query + '%' } },
-            { 'last_name': { [Op.like]: '%' + query + '%' } },
-            { 'library_id': { [Op.like]: '%' + query + '%' } },
-            { 'email': { [Op.like]: '%' + query + '%' } },
-            { 'address': { [Op.like]: '%' + query + '%' } },
-            { 'zip_code': { [Op.like]: '%' + query + '%' } },
-          ]
-        }
-      }).then(function(patrons){
-        // res.render('patrons',{patrons: patrons,title: 'Searched patrons'});
-        res.send(query.length);
-      })
+  Patron.findAll({
+    where: {
+      $or: [
+        { 'first_name': { [Op.like]: '%' + query + '%' } },
+        { 'last_name': { [Op.like]: '%' + query + '%' } },
+        { 'library_id': { [Op.like]: '%' + query + '%' } },
+        { 'email': { [Op.like]: '%' + query + '%' } },
+        { 'address': { [Op.like]: '%' + query + '%' } },
+        { 'zip_code': { [Op.like]: '%' + query + '%' } },
+      ]
+    }
+  }).then(function(patrons){
+    res.render('patrons',{patrons: patrons,title: 'Searched patrons'});
+  }).catch(function(error){
+      res.send(500, error);
+    })
 });
-
-
-
-
 
 router.get('/new_patron', function(req, res, next) {
   res.render('patrons/new_patron',{title: 'New Patron'});

@@ -11,6 +11,7 @@ const Op = Sequelize.Op;
 //Below is the limit of results per page
 let limit = 10;
 
+//LOANS MAIN PAGE GET
 router.get('/', function(req, res, next) {
   //the limit of loans per page
   // let limit = 6;
@@ -43,7 +44,7 @@ router.get('/', function(req, res, next) {
       res.send(500, error);
    });
 });
-
+//LOANS PAGES GET
 router.get('/loansPages/:page', function(req, res, next) {
   //the limit of loans per page
   // let limit = 6;
@@ -77,7 +78,7 @@ router.get('/loansPages/:page', function(req, res, next) {
       res.send(500, error);
    });
 });
-
+//CHECKED LOANS GET
 router.get('/checked_loans', function(req, res, next) {
   Loan.findAll({
     include: [{ all: true }],
@@ -91,10 +92,10 @@ router.get('/checked_loans', function(req, res, next) {
       res.send(500, error);
    });
 });
-
+//OVERDUE LOANS GET
 router.get('/overdue_loans', function(req, res, next) {
   // var currentDate = new Date();
-  var currentDate = moment();
+  var currentDate = moment().format('YYYY-MM-DD');
   Loan.findAll({
     include: [{ all: true }],
     where: {
@@ -106,52 +107,21 @@ router.get('/overdue_loans', function(req, res, next) {
       }
     }
   }).then(function(loans){
-    res.render('loans/overdue_loans',{loans: loans});
-    // res.send(loans);
+    res.render('loans/overdue_loans',{
+      loans: loans
+    });
+    // res.send(moment().format('YYYY*MM*DD'));
   }).catch(function(error){
       res.send(500, error);
    });
 });
 
-// router.get('/new_loan', function(req, res, next) {
-//   var books;
-//   var patrons;
-//   var currentDate = moment().format('YYYY/MM/DD');
-//   var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
-//
-//   Book.findAll({
-//     include: [{ all: true }]})
-//     .then(function(results){
-//       books = results;
-//     }).then(
-//     Patron.findAll({
-//       include: [{ all: true }]
-//     }).then( function(results){
-//       patrons = results;
-//     }).then(function(){
-//       // res.render('loans/new_loan', {
-//       //   books: books,
-//       //   patrons: patrons,
-//       //   cDate: currentDate,
-//       //   rDate: returnDate
-//       // });
-//       res.send(books);
-//     })
-//     // .catch(function(err){
-//     //   return next(err);
-//     // })
-//   );
-// });
-
-//==========================================
-//==========================================
-//==========================================
-
+//NEW LOAN GET
 router.get('/new_loan', function(req, res, next) {
   var books, numBooks;
   var patrons;
-  var currentDate = moment().format('YYYY/MM/DD');
-  var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
+  // var currentDate = moment().format('YYYY/MM/DD');
+  // var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
 
   Book.findAll({
     include: [{ all: true }],
@@ -175,8 +145,10 @@ router.get('/new_loan', function(req, res, next) {
         books: books,
         numBooks: numBooks,
         patrons: patrons,
-        cDate: currentDate,
-        rDate: returnDate
+        loaned_on: moment().format('YYYY-MM-DD'),
+        return_by: moment().add(7, 'days').format('YYYY-MM-DD')
+        // loaned_on: moment().format('YYYY-MM-DD'),
+        // return_by: moment().add(7, 'days').format('YYYY-MM-DD')
       });
       // res.send(books);
     })
@@ -185,31 +157,7 @@ router.get('/new_loan', function(req, res, next) {
     // })
   );
 });
-//==========================================
-//==========================================
-//==========================================
-
-/* POST create article. POST POST POST POST POST */
-// router.post('/new_loan', function(req, res, next) {
-//   Loan.create(req.body).then(function(loan) {
-//     // res.redirect("/loans");
-//     // res.redirect('new_loan');
-//     res.send(req.body);
-//
-//   }).catch(function(error){
-//       if(error.name === "SequelizeValidationError") {
-//         console.log("error");
-//       } else {
-//         throw error;
-//       }
-//   }).catch(function(error){
-//       res.send(500, error);
-//    });
-// });
-
-
-
-
+//NEW LOAN POST
 router.post('/new_loan', function(req, res, next) {
   Loan.create(req.body).then(function(loan) {
     Book.findById(req.body.book_id).then(function(book){
@@ -217,10 +165,6 @@ router.post('/new_loan', function(req, res, next) {
         where:{id: req.body.book_id}
       });
     })
-    // res.redirect("/loans");
-    // res.redirect('new_loan');
-    // res.send(req.body);
-
   }).then(function(){
     // res.send(req.body)
     res.redirect("/loans");
@@ -235,7 +179,7 @@ router.post('/new_loan', function(req, res, next) {
    });
 });
 
-
+//RETURN BOOK GET
 router.get('/return_book/:id', function(req, res, next) {
 
   var currentDate = moment().format('YYYY/MM/DD');
@@ -260,56 +204,7 @@ router.get('/return_book/:id', function(req, res, next) {
       res.send(500, error);
    });
 });
-
-
-// router.put('/return_book/:id', function(req, res, next){
-//   Loan.findById(req.params.id).then(function(loan){
-//     return loan.update(req.body);
-//   }).then(function(loan){
-//     res.redirect('/loans/');
-//     // res.send(req.body);
-//   }).catch(function(error){
-//       console.log("there is a huge 500 error here");
-//       res.status(500).send(error);
-//    });
-// });
-
-//==========================================
-//==========================================
-//==========================================
-
-// router.put('/return_book/:id', function(req, res, next){
-//   Loan.findById(req.params.id).then(function(loan){
-//     Book.findById(req.body.book_id).then(function(book){
-//       book.update({loan_status: "not null"},{
-//         where:{id: req.body.book_id}
-//       });
-//     });
-//     // return loan.update(req.body);
-//   }).then(function(loan){
-//     res.redirect('/loans/');
-//     // res.send(req.body);
-//   }).catch(function(error){
-//       console.log("there is a huge 500 error here");
-//       res.status(500).send(error);
-//    });
-// });
-
-// router.put('/return_book/:id', function(req, res, next){
-//     Book.findById(req.body.book_id).then(function(book){
-//       return book.update({loan_status: null},{
-//         where:{id: req.body.book_id}
-//       });
-//   }).then(function(loan){
-//     res.redirect('/loans/');
-//     // res.send(req.body);
-//   }).catch(function(error){
-//       console.log("there is a huge 500 error here");
-//       res.status(500).send(error);
-//    });
-// });
-
-
+//RETURN BOOK PUT
 router.put('/return_book/:id', function(req, res, next){
   Loan.findById(req.params.id).then(function(loan){
     Book.findById(loan.book_id).then(function(book){
@@ -326,21 +221,5 @@ router.put('/return_book/:id', function(req, res, next){
       res.status(500).send(error);
    });
 });
-//==========================================
-//==========================================
-//==========================================
-
-
-// /* PUT Edit/change book details. PUT PUT PUT PUT PUT  */
-// router.put('/:id', function(req, res, next){
-//   Book.findById(req.params.id).then(function(book){
-//     return book.update(req.body);
-//   }).then(function(book){
-//     res.redirect('/books/' + book.id);
-//   }).catch(function(error){
-//       console.log("there is a huge 500 error here");
-//       res.status(500).send(error);
-//    });
-// });
 
 module.exports = router;
