@@ -117,16 +117,42 @@ router.get('/new_book', function(req, res, next) {
 router.post('/new_book', function(req, res, next) {
   Book.create(req.body).then(function(book) {
     res.redirect("/books");
-  }).catch(function(error){
-      if(error.name === "SequelizeValidationError") {
-        console.log("error");
+  }).catch(function(err){
+      if(err.name === "SequelizeValidationError") {
+        var titleErr = [];
+        var genreErr = [];
+        var authorErr = [];
+        var yearErr = [];
+        for (var i=0; i<err.errors.length; i++) {
+          if (err.errors[i].path === 'title'){
+            titleErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'genre'){
+            genreErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'author'){
+            authorErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'first_published'){
+            yearErr.push(err.errors[i].message)
+          }
+        }
+      res.render('books/new_book', {
+        title: 'New Book',
+        bookTitle: req.body.title,
+        bookAuthor: req.body.author,
+        bookGenre: req.body.genre,
+        bookPublished: req.body.first_published,
+        titleErr: titleErr,
+        genreErr: genreErr,
+        authorErr: authorErr,
+        yearErr: yearErr
+      });
       } else {
-        throw error;
-      }
-  }).catch(function(error){
-      res.send(500, error);
-   });
-;});
+          return next(err);
+        }
+  });
+  // .catch(function(error){
+  //     res.send(500, error);
+  //  });
+});
 
 /* PUT Edit/change book details. PUT PUT PUT PUT PUT  */
 router.put('/:id', function(req, res, next){

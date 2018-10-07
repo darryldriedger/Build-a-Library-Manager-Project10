@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: {
-          msg: "Please enter a genre"
+          msg: "Please enter a Year (4 digits)"
         }
       }
     },

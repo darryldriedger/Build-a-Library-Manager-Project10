@@ -1,12 +1,13 @@
---------------------------------------------------()New Book : done ; BUG - NOT ALLOW SAME BOOK NAME ?
---------------------------------------------------()List all: search; BUG - empty search error
-List overdue: pagination, search ;
-List checked out: pagination, search ;
-
++--------------------------------------------------()New Book : done ; Form field error handling done ; BUG - NOT ALLOW SAME BOOK NAME ?
+--------------------------------------------------()List all: done; BUG - empty search error
+-----List overdue: pagination;
+-----List checked out: pagination;
+Edit book : form field error handling when empty
 
 
 --------------------------------------------------()New Patron: done ; BUG - NOT ALLOW TWO OF THE SAME PATRON ID#
 --------------------------------------------------()List All: search; BUG - empty search error
+Edit Patron : form field error handling when empty
 
 --------------------------------------------------()New Loan: done ; BUG - NOT ALLOW BACK PAGE AND CREATE EMPTY LOAN
 --------------------------------------------------()List all: done;
@@ -27,7 +28,7 @@ Other
 
 ERROR/BUG FIXING
 -----
-
+ - dont allow blank fields (error handling)
  - Dont allow creating the same book name
  - handle the issue of being able to go back to the create loan page and creating another empty loans
  - Dont allow the same Patron id to be used when creating a new patron_nav
