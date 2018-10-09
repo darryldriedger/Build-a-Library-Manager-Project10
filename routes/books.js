@@ -161,10 +161,32 @@ router.put('/:id', function(req, res, next){
   }).then(function(book){
     res.redirect('/books/');
     // res.send(req.body);
-  }).catch(function(error){
-      console.log("there is a huge 500 error here");
-      res.status(500).send(error);
-   });
+  }).catch(function(err){
+      if(err.name === "SequelizeValidationError") {
+        var errMessage = "Can't submit changes with blank form fields";
+        Book.findAll({
+          include: [{ model: Loan, include: [{ model: Patron }] }],
+        where: {id: req.params.id}
+        })
+          .then(function(data){
+            var bookInfo = JSON.parse(JSON.stringify(data));
+            let book = bookInfo[0];
+            let loans = book.Loans;
+          res.render('books/book_detail',{
+            book: book,
+            loans: loans,
+            errMessage: errMessage
+          });
+        }).catch(function(error){
+            res.send(500, error);
+         });
+      }
+
+    })
+   //      .catch(function(error){
+   //    console.log("there is a huge 500 error here");
+   //    res.status(500).send(error);
+   // });
 });
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */

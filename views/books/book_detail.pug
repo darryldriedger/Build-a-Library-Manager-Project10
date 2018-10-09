@@ -16,7 +16,10 @@ block content
       label(for='first_published') First Published
       input#first_published(type='text' name='first_published' value=book.first_published)
     p
-      input(type='submit' value='Update')      
+      input(type='submit' value='Update') 
+    - if (errMessage){
+      p.error #{errMessage}
+    - } 
   h2 Loan History
   table
     thead

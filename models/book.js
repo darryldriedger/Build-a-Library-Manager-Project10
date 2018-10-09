@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Please enter a title"
+          msg: "Please enter a Title"
         }
       }
     },
@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Please enter an author"
+          msg: "Please enter an Author"
         }
       }
     },
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Please enter a genre"
+          msg: "Please enter a Genre"
         }
       }
     },

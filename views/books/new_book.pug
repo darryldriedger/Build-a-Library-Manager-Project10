@@ -50,14 +50,14 @@ block content
       - if (bookPublished) {
         p
           label(for='first_published') First Published
-          input#first_published(type='text' name='first_published' value='#{bookPublished}')
+          input#first_published(type='text' name='first_published' value=bookPublished)
       - if (yearErr !== ""){
         p.error #{yearErr}
       - }
       - } else {
         p
           label(for='first_published') First Published
-          input#first_published(type='text' name='first_published')
+          input#first_published(type='text' name='first_published' value=bookPublished)
       - if (yearErr !== ""){
         p.error #{yearErr}
       - }

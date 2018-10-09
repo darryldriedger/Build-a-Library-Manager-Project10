@@ -2,7 +2,7 @@
 --------------------------------------------------()List all: done; BUG - empty search error
 -----List overdue: pagination;
 -----List checked out: pagination;
-Edit book : form field error handling when empty
+--------------------------------------------------()Edit book : done; form field error handling when empty
 
 
 --------------------------------------------------()New Patron: done ; BUG - NOT ALLOW TWO OF THE SAME PATRON ID#
