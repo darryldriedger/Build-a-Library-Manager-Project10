@@ -7,7 +7,11 @@ script.
       var key = e.which || e.keyCode;
       if (key === 13) { 
       var text = searchInput.value;
+      if(text !== ""){
       var urlPath = `/patrons/search/${text}`
+      } else {
+        var urlPath = `/patrons/`
+      }
       window.history.pushState({"html":text,"pageTitle":"searching patrons"},"", urlPath);
       window.history.go();
       console.log("/patrons/search/" + text);
@@ -16,7 +20,11 @@ script.
       //event listener to trigger when the search button is clicked      
       searchButton.addEventListener('click', function(){
       var text = searchInput.value;
+      if(text !== ""){
       var urlPath = `/patrons/search/${text}`
+      } else {
+        var urlPath = `/patrons/`
+      }
       window.history.pushState({"html":text,"pageTitle":"searching patrons"},"", urlPath);
       window.history.go();
       console.log("/patrons/search/" + text);

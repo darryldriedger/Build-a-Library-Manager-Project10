@@ -60,19 +60,20 @@ router.get('/booksPages/:page', function(req, res, next) {
 
 router.get('/search/:query', function(req, res, next) {
   var query = req.params.query;
-    Book.findAll({
-      where: {
-        $or: [
-          { 'title': { [Op.like]: '%' + query + '%' } },
-          { 'author': { [Op.like]: '%' + query + '%' } },
-          { 'genre': { [Op.like]: '%' + query + '%' } },
-          { 'first_published': { [Op.like]: '%' + query + '%' } }
-        ]
-      }
-    }).then(function(books){
-      res.render('books',{books: books,title: 'Searched books'});
-      // res.send(books);
-    })
+
+      Book.findAll({
+        where: {
+          $or: [
+            { 'title': { [Op.like]: '%' + query + '%' } },
+            { 'author': { [Op.like]: '%' + query + '%' } },
+            { 'genre': { [Op.like]: '%' + query + '%' } },
+            { 'first_published': { [Op.like]: '%' + query + '%' } }
+          ]
+        }
+      }).then(function(books){
+        res.render('books',{books: books,title: 'Searched books'});
+        // res.send(books);
+      })
 });
 
 router.get('/checked_books', function(req, res, next) {
@@ -123,6 +124,7 @@ router.post('/new_book', function(req, res, next) {
         var genreErr = [];
         var authorErr = [];
         var yearErr = [];
+
         for (var i=0; i<err.errors.length; i++) {
           if (err.errors[i].path === 'title'){
             titleErr.push(err.errors[i].message)

@@ -1,25 +1,103 @@
 extends ../layout
 
 block content
-    h1 New Patron
+    h1 #{title}
     form( method="post")
-      p
-        label(for='first_name') First Name
-        input#first_name(type='text' name='first_name')
-      p
-        label(for='last_name') Last Name
-        input#last_name(type='text' name='last_name')
-      p
-        label(for='address')  Address
-        input#address(type='text' name='address')
-      p
-        label(for='email') Email
-        input#email(type='text' name='email')
-      p
-        label(for='library_id') Library ID
-        input#library_id(type='text' name='library_id')
-      p
-        label(for='zip_code') Zip Code
-        input#zip_code(type='text' name='zip_code')
+      - if (first_name) {
+        p
+          label(for='first_name') First Name
+          input#first_name(type='text' name='first_name' value= first_name)  
+      - if (firstnameErr !== ""){
+        p.error #{firstnameErr}
+      - }
+      - } else {
+        p
+          label(for='first_name') First Name
+          input#first_name(type='text' name='first_name') 
+      - if (firstnameErr !== ""){
+        p.error #{firstnameErr}
+      - }
+      - }
+      
+      - if (last_name) {
+        p
+          label(for='last_name') Last Name
+          input#last_name(type='text' name='last_name' value= last_name)
+      - if (lastnameErr !== ""){
+        p.error #{lastnameErr}
+      - }
+      - } else {
+        p
+          label(for='last_name') Last Name
+          input#last_name(type='text' name='last_name')
+      - if (lastnameErr !== ""){
+        p.error #{lastnameErr}
+      - }
+      - }        
+
+      - if (address) {
+        p
+          label(for='address')  Address
+          input#address(type='text' name='address' value= address)
+      - if (lastnameErr !== ""){
+        p.error #{addressErr}
+      - }
+      - } else {
+        p
+          label(for='address')  Address
+          input#address(type='text' name='address')
+      - if (addressErr !== ""){
+        p.error #{addressErr}
+      - }
+      - }
+      
+      - if (email) {
+        p
+          label(for='email') Email
+          input#email(type='text' name='email' value= email)
+      - if (emailErr !== ""){
+        p.error #{emailErr}
+      - }
+      - } else {
+        p
+          label(for='email') Email
+          input#email(type='text' name='email')
+      - if (emailErr !== ""){
+        p.error #{emailErr}
+      - }
+      - }
+      
+      - if (library_id) {
+        p
+          label(for='library_id') Library ID
+          input#library_id(type='text' name='library_id' value= library_id) 
+      - if (libraryIdErr !== ""){
+        p.error #{libraryIdErr}
+      - }
+      - } else {
+        p
+          label(for='library_id') Library ID
+          input#library_id(type='text' name='library_id')
+      - if (libraryIdErr !== ""){
+        p.error #{libraryIdErr}
+      - }
+      - }
+      
+      - if (zip_code) {
+        p
+          label(for='zip_code') Zip Code
+          input#zip_code(type='text' name='zip_code' value= zip_code)
+      - if (zipcodeErr !== ""){
+        p.error #{zipcodeErr}
+      - }
+      - } else {
+        p
+          label(for='zip_code') Zip Code
+          input#zip_code(type='text' name='zip_code')
+      - if (zipcodeErr !== ""){
+        p.error #{zipcodeErr}
+      - }
+      - }
+
       p
         input(type='submit', value='Create New Patron')

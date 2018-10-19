@@ -5,12 +5,54 @@ module.exports = (sequelize, DataTypes) => {
     //     type: DataTypes.INTEGER,
     //     primaryKey: true
     // },
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
-    address: DataTypes.STRING,
-    email: DataTypes.STRING,
-    library_id: DataTypes.STRING,
-    zip_code: DataTypes.INTEGER
+    first_name:  {
+       type: DataTypes.STRING,
+       validate: {
+         notEmpty: {
+           msg: "Please enter a First Name"
+         }
+       }
+     },
+    last_name:  {
+       type: DataTypes.STRING,
+       validate: {
+         notEmpty: {
+           msg: "Please enter a Last Name"
+         }
+       }
+     },
+    address:  {
+       type: DataTypes.STRING,
+       validate: {
+         notEmpty: {
+           msg: "Please enter an Address"
+         }
+       }
+     },
+    email:  {
+       type: DataTypes.STRING,
+       validate: {
+         notEmpty: {
+           msg: "Please enter an Email"
+         }
+       }
+     },
+    library_id:  {
+       type: DataTypes.STRING,
+       validate: {
+         notEmpty: {
+           msg: "Please enter a Library ID"
+         }
+       }
+     },
+    zip_code:  {
+       type: DataTypes.INTEGER,
+       validate: {
+         notEmpty: {
+           msg: "Please enter a Zip Code"
+         }
+       }
+     },
   });
 
   Patron.associate = function(models) {

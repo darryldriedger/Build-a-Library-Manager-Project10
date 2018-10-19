@@ -7,7 +7,7 @@
 
 --------------------------------------------------()New Patron: done ; BUG - NOT ALLOW TWO OF THE SAME PATRON ID#
 --------------------------------------------------()List All: search; BUG - empty search error
-Edit Patron : form field error handling when empty
+--------------------------------------------------()Edit Patron : done;
 
 --------------------------------------------------()New Loan: done ; BUG - NOT ALLOW BACK PAGE AND CREATE EMPTY LOAN
 --------------------------------------------------()List all: done;
@@ -22,17 +22,15 @@ Other
  - error handling and form field error handling
  - reset will set the search field to blank and then reload the books index page
  - reload when going back to new book or loan
- - finish the searches code
  - finish the pagination code
  - place focus on input field for search field
 
 ERROR/BUG FIXING
 -----
- - dont allow blank fields (error handling)
+ - dont allow blank fields (error handling) ... loans
  - Dont allow creating the same book name
  - handle the issue of being able to go back to the create loan page and creating another empty loans
  - Dont allow the same Patron id to be used when creating a new patron_nav
- - BUG in search if field is empty
 
 
  NOTES

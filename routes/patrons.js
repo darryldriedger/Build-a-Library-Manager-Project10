@@ -92,16 +92,56 @@ router.get('/new_patron', function(req, res, next) {
 router.post('/new_patron', function(req, res, next) {
   Patron.create(req.body).then(function(patron) {
     res.redirect("/patrons");
-  }).catch(function(error){
-      if(error.name === "SequelizeValidationError") {
-        console.log("error");
+  }).catch(function(err){
+    // res.send(err.errors);
+      if(err.name === "SequelizeValidationError") {
+        var firstnameErr = [];
+        var lastnameErr = [];
+        var addressErr = [];
+        var emailErr = [];
+        var libraryIdErr = [];
+        var zipcodeErr = [];
+
+        for (var i=0; i<err.errors.length; i++) {
+          if (err.errors[i].path === 'first_name'){
+            firstnameErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'last_name'){
+            lastnameErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'address'){
+            addressErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'email'){
+            emailErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'library_id'){
+            libraryIdErr.push(err.errors[i].message)
+          } else if (err.errors[i].path === 'zip_code'){
+            zipcodeErr.push(err.errors[i].message)
+          }
+        }
+        // res.send(err.errors);
+      res.render('patrons/new_patron', {
+        title: 'New Patron',
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        address: req.body.address,
+        email: req.body.email,
+        address: req.body.address,
+        library_id: req.body.library_id,
+        zip_code: req.body.zip_code,
+        firstnameErr: firstnameErr,
+        lastnameErr: lastnameErr,
+        addressErr: addressErr,
+        emailErr: emailErr,
+        libraryIdErr: libraryIdErr,
+        zipcodeErr: zipcodeErr
+      });
       } else {
-        throw error;
-      }
-  }).catch(function(error){
-      res.send(500, error);
-   });
-;});
+          return next(err);
+        }
+  });
+  // .catch(function(error){
+  //     res.send(500, error);
+  //  });
+});
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 // router.get('/:id', function(req, res, next) {
