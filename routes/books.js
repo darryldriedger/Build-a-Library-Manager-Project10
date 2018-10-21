@@ -9,7 +9,7 @@ var moment = require('moment');
 var Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
-let limit = 5;
+let limit = 2;
 let pageId = 'books';
 
 router.get('/', function(req, res, next) {
@@ -77,22 +77,67 @@ router.get('/search/:query', function(req, res, next) {
 });
 
 router.get('/checked_books', function(req, res, next) {
-  Loan.findAll({
+  Loan.findAndCountAll({
     include: [{ all: true }],
       where: {
       returned_on: null
-    }
-  }).then(function(books){
-    res.render('books/checked_books',{books: books,title: 'Checked Out Books'});
+    },
+      offset: 0,
+      limit: limit,
+  }).then(function(result){
+      let books = result.rows;
+      let pages = Math.ceil(result.count / limit);
+      let link = 'books/checkedbooksPages/';
+    res.render('books/checked_books',{
+      title: 'Checked Out Books',
+      pageId: pageId,
+      books: books,
+      pages: pages,
+      link: link
+    });
     // res.send(books);
   }).catch(function(error){
       res.send(500, error);
    });
 });
 
+router.get('/checkedbooksPages/:page', function(req, res, next) {
+  // This will set the page number according to the page reference in the parameters
+  let page = req.params.page;
+  // Sets the offset according to the page that is being chosen
+  let offset = limit * (page - 1);
+  Loan.findAndCountAll({
+    include: [{ all: true }],
+      where: {
+      returned_on: null
+    },
+    offset: offset,
+    limit: limit
+  })
+  .then(function(result){
+    let books = result.rows;
+    let pages = Math.ceil(result.count / limit);
+    let link = 'books/checkedbooksPages/';
+          res.render('books/checked_books',{
+            title: 'Checked Books',
+            pageId: pageId,
+            books: books,
+            pages: pages,
+            link: link
+          });
+  }).catch(function(error){
+      res.send(500, error);
+   });
+});
+
+//--==========================
+//--==========================
+//--==========================
+
 router.get('/overdue_books', function(req, res, next) {
 var currentDate = moment().format('YYYY-MM-DD').toString();
-Loan.findAll({
+
+Loan.findAndCountAll({
   include: [{ all: true }],
   where: {
     return_by: {
@@ -101,14 +146,69 @@ Loan.findAll({
     returned_on: {
       [Op.eq]: null
     }
-  }
-  }).then(function(books){
-    res.render('books/overdue_books',{books: books,title: 'Overdue Books'});
+  },
+    offset: 0,
+    limit: limit,
+  }).then(function(result){
+      let books = result.rows;
+      let pages = Math.ceil(result.count / limit);
+      let link = 'books/overduebooksPages/';
+
+    res.render('books/overdue_books',{
+      title: 'Overdue Books',
+      pageId: pageId,
+      books: books,
+      pages: pages,
+      link: link
+    });
 // res.send(books);
   }).catch(function(error){
       res.send(500, error);
    });
 });
+
+router.get('/overduebooksPages/:page', function(req, res, next) {
+var currentDate = moment().format('YYYY-MM-DD').toString();
+  // This will set the page number according to the page reference in the parameters
+  let page = req.params.page;
+  // Sets the offset according to the page that is being chosen
+  let offset = limit * (page - 1);
+  Loan.findAndCountAll({
+    include: [{ all: true }],
+    where: {
+      return_by: {
+      [Op.lt]: currentDate
+      },
+      returned_on: {
+        [Op.eq]: null
+      }
+    },
+    offset: offset,
+    limit: limit
+  })
+  .then(function(result){
+    let books = result.rows;
+    let pages = Math.ceil(result.count / limit);
+    let link = 'books/overduebooksPages/';
+          res.render('books/overdue_books',{
+            title: 'Overdue Books',
+            pageId: pageId,
+            books: books,
+            pages: pages,
+            link: link
+          });
+  }).catch(function(error){
+      res.send(500, error);
+   });
+});
+
+
+
+//--==========================
+//--==========================
+//--==========================
+
+
 
 router.get('/new_book', function(req, res, next) {
   res.render('books/new_book',{title: 'New Book'});

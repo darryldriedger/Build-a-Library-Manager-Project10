@@ -19,7 +19,7 @@ Other
 -----
  - work on highlighting the active page button
  - maybe include patron_nav and book_nav in the same pug file
- - error handling and form field error handling
+ - error handling and form field error handling (other than blank field handling verify proper data)
  - reset will set the search field to blank and then reload the books index page
  - reload when going back to new book or loan
  - finish the pagination code
