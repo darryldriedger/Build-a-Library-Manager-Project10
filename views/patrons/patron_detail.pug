@@ -23,6 +23,9 @@ block content
         input#zip_code(type='text' name='zip_code' value=patron.zip_code)
       p
         input(type='submit', value='Update')
+      - if (errMessage){
+        p.error #{errMessage}
+      - }         
     h2 Loan History
     table
       thead

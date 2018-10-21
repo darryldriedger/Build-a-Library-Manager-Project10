@@ -172,19 +172,8 @@ router.get('/:id', function(req, res, next) {
       loans: loans,
       // book: book,
     });
-        // res.send(bookInfo);
-        // res.send(loans);
-        // res.send(patron);
-    // res.send(book);
-    // res.send(loans[0].Patron);
-    // res.send(book[0].loans);
-    // res.send(JSON.parse(book));
-    // res.send("this is great!");
-    // console.log(JSON.stringify(book));
   }).catch(function(error){
       res.send(500, error);
-      // res.send("this is great!");
-      // res.status(500).send(body);
    });
 });
 //-------------------------------------------------------------
@@ -197,9 +186,29 @@ router.put('/:id', function(req, res, next){
     return patron.update(req.body);
   }).then(function(patron){
     res.redirect('/patrons/' + patron.id);
-  }).catch(function(error){
-      console.log("there is a huge 500 error here");
-      res.status(500).send(error);
-   });
+  }).catch(function(err){
+      if(err.name === "SequelizeValidationError") {
+        var errMessage = "Can't submit changes with blank form fields";
+        Patron.findAll({
+          include: [{ model: Loan, include: [{ model: Book }] }],
+        where: {id: req.params.id}
+        })
+          .then(function(data){
+            // var result  = JSON.parse(book);
+            var patronInfo = JSON.parse(JSON.stringify(data));
+            let patron = patronInfo[0];
+            let loans = patron.Loans;
+            // let book = loans[0].Book;
+          res.render('patrons/patron_detail',{
+            patron: patron,
+            loans: loans,
+            errMessage: errMessage
+          });
+        }).catch(function(error){
+            res.send(500, error);
+         });
+      }
+
+    })
 });
 module.exports = router;

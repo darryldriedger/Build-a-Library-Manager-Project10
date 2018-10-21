@@ -9,7 +9,7 @@ var moment = require('moment');
 var Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
-let limit = 2;
+let limit = 5;
 let pageId = 'books';
 
 router.get('/', function(req, res, next) {

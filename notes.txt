@@ -1,7 +1,7 @@
 +--------------------------------------------------()New Book : done ; Form field error handling done ; BUG - NOT ALLOW SAME BOOK NAME ?
 --------------------------------------------------()List all: done; BUG - empty search error
------List overdue: pagination;
------List checked out: pagination;
+--------------------------------------------------()List overdue: done pagination;
+--------------------------------------------------()List checked out: done pagination;
 --------------------------------------------------()Edit book : done; form field error handling when empty
 
 
@@ -39,3 +39,9 @@ ERROR/BUG FIXING
  library2 database is the original database witouth the loan_status column in books table
  library4 database was working before i changed the dateonly parameter in the model
  *remember - date only fixed my date problem
+
+ PRIORITY LIST
+ -------------
+
+ - error checking empty field for new loans form
+ - patron detail empty field error checking
