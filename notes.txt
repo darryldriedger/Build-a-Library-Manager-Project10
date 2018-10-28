@@ -1,12 +1,12 @@
-+--------------------------------------------------()New Book : done ; Form field error handling done ; BUG - NOT ALLOW SAME BOOK NAME ?
---------------------------------------------------()List all: done; BUG - empty search error
---------------------------------------------------()List overdue: done pagination;
---------------------------------------------------()List checked out: done pagination;
---------------------------------------------------()Edit book : done; form field error handling when empty
++--------------------------------------------------()New Book : done; BUG - NOT ALLOW SAME BOOK NAME ?
+--------------------------------------------------()List all: done;
+--------------------------------------------------()List overdue: done
+--------------------------------------------------()List checked out: done;
+--------------------------------------------------()Edit book : done;
 
 
 --------------------------------------------------()New Patron: done ; BUG - NOT ALLOW TWO OF THE SAME PATRON ID#
---------------------------------------------------()List All: search; BUG - empty search error
+--------------------------------------------------()List All: search;
 --------------------------------------------------()Edit Patron : done;
 
 --------------------------------------------------()New Loan: done ; BUG - NOT ALLOW BACK PAGE AND CREATE EMPTY LOAN
@@ -36,7 +36,7 @@ ERROR/BUG FIXING
  NOTES
  -----
 
- library2 database is the original database witouth the loan_status column in books table
+ library2 database is the original database without the "loan_status" column in books table
  library4 database was working before i changed the dateonly parameter in the model
  *remember - date only fixed my date problem
 
@@ -44,4 +44,23 @@ ERROR/BUG FIXING
  -------------
 
  - error checking empty field for new loans form
- - patron detail empty field error checking
+ - patron detail empty field specific error checking
+ - validate data types in form fields
+
+PROJECT CHECKLIST
+-----------------
+
+- models               - done
+- homescreen           - done
+- navigation           - done
+- books listing page   - done
+- new books page       - need to validate data in form fields (sequelize model validation)
+- book detail page     - need to validate data in form fields (sequelize model validation)
+- loans listing page   - done
+- new loan page        - need to validate data in form fields (sequelize model validation)
+- return book page     - need to validate data in form fields (sequelize model validation)
+- patrons listing page - done
+- patron detail page   - need to validate data in form fields (sequelize model validation)
+- new patron page      - need to validate data in form fields (sequelize model validation)
+
+//finish of the code comments and all of the error handling 

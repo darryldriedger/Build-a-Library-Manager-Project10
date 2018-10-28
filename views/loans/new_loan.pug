@@ -25,7 +25,9 @@ block content
             input#return_by(type='text' name='return_by' value= return_by)
           p
             input(type='submit', value='Create New Loan')
-
+          - if (errMessage){
+            p.error #{errMessage}
+          - } 
 //-  value='Sun May 22 2016 17:00:00 GMT-0700 (PDT)'
 //- value='Sun May 29 2016 17:00:00 GMT-0700 (PDT)'
 //- td

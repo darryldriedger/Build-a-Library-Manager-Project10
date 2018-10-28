@@ -16,3 +16,6 @@ block content
         input#returned_on(type='text' name='returned_on' value= returned_on) 
       p
         input(type='submit', value='Return Book')
+      - if (errMessage){
+        p.error #{errMessage}
+      - }   

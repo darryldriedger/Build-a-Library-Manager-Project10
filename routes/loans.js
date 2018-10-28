@@ -168,22 +168,56 @@ router.post('/new_loan', function(req, res, next) {
   }).then(function(){
     // res.send(req.body)
     res.redirect("/loans");
-  }).catch(function(error){
-      if(error.name === "SequelizeValidationError") {
-        console.log("error");
-      } else {
-        throw error;
+  }).catch(function(err){
+      if(err.name === "SequelizeValidationError") {
+        var errMessage = "Can't submit with blank form fields";
+        var books, numBooks;
+        var patrons;
+        // var currentDate = moment().format('YYYY/MM/DD');
+        // var returnDate = moment().add(7, 'd').format('YYYY/MM/DD');
+
+        Book.findAll({
+          include: [{ all: true }],
+          where:{
+            loan_status: {
+             [Op.eq]: null
+            }
+          }
+        })
+          .then(function(results){
+            books = results;
+            numBooks = books.length;
+            console.log(numBooks);
+          }).then(
+          Patron.findAll({
+            include: [{ all: true }]
+          }).then( function(results){
+            patrons = results;
+          }).then(function(){
+            res.render('loans/new_loan', {
+              books: books,
+              numBooks: numBooks,
+              patrons: patrons,
+              loaned_on: moment().format('YYYY-MM-DD'),
+              return_by: moment().add(7, 'days').format('YYYY-MM-DD'),
+              errMessage: errMessage
+              // loaned_on: moment().format('YYYY-MM-DD'),
+              // return_by: moment().add(7, 'days').format('YYYY-MM-DD')
+            });
+            // res.send(books);
+          })
+          // .catch(function(err){
+          //   return next(err);
+          // })
+        );
       }
-  }).catch(function(error){
-      res.send(500, error);
-   });
+
+    })
 });
 
 //RETURN BOOK GET
 router.get('/return_book/:id', function(req, res, next) {
-
   var currentDate = moment().format('YYYY/MM/DD');
-
   Loan.findAll({
     include: [{all: true}],
     where: {
@@ -216,10 +250,33 @@ router.put('/return_book/:id', function(req, res, next){
   }).then(function(loan){
     res.redirect('/loans/');
     // res.send(loan);
-  }).catch(function(error){
-      console.log("there is a huge 500 error here");
-      res.status(500).send(error);
-   });
+  }).catch(function(err){
+      if(err.name === "SequelizeValidationError") {
+        var errMessage = "Can't submit with blank form fields";
+        var currentDate = moment().format('YYYY/MM/DD');
+        Loan.findAll({
+          include: [{all: true}],
+          where: {
+            id: req.params.id
+          }
+        }).then(function(data){
+            let bookInfo = JSON.parse(JSON.stringify(data));
+            let loanCount = Object.keys(bookInfo).length;
+            let returnBook = bookInfo[0];
+            console.log(Object.keys(bookInfo).length);
+          res.render('loans/return_book',{
+            title: 'Return Book',
+            loan: returnBook,
+            returned_on: currentDate,
+            errMessage: errMessage
+          });
+          // res.send(bookInfo);
+        }).catch(function(error){
+            res.send(500, error);
+         });
+      }
+
+    })
 });
 
 module.exports = router;

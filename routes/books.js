@@ -119,7 +119,7 @@ router.get('/checkedbooksPages/:page', function(req, res, next) {
     let pages = Math.ceil(result.count / limit);
     let link = 'books/checkedbooksPages/';
           res.render('books/checked_books',{
-            title: 'Checked Books',
+            title: 'Checked Out Books',
             pageId: pageId,
             books: books,
             pages: pages,

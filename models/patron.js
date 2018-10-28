@@ -8,23 +8,26 @@ module.exports = (sequelize, DataTypes) => {
     first_name:  {
        type: DataTypes.STRING,
        validate: {
-         notEmpty: {
-           msg: "Please enter a First Name"
+         len: {
+           args: [2,20],
+           msg: "Please enter a First Name (2-10 characters)"
          }
        }
      },
     last_name:  {
        type: DataTypes.STRING,
        validate: {
-         notEmpty: {
-           msg: "Please enter a Last Name"
+         len: {
+           args: [2,20],
+           msg: "Please enter a Last Name (2-10 characters)"
          }
        }
      },
     address:  {
        type: DataTypes.STRING,
        validate: {
-         notEmpty: {
+         len: {
+           args: [2,30],
            msg: "Please enter an Address"
          }
        }
@@ -32,15 +35,16 @@ module.exports = (sequelize, DataTypes) => {
     email:  {
        type: DataTypes.STRING,
        validate: {
-         notEmpty: {
+         isEmail: {
            msg: "Please enter an Email"
-         }
+         },
        }
      },
     library_id:  {
        type: DataTypes.STRING,
        validate: {
-         notEmpty: {
+         len: {
+           args: [1,10],
            msg: "Please enter a Library ID"
          }
        }
@@ -48,8 +52,9 @@ module.exports = (sequelize, DataTypes) => {
     zip_code:  {
        type: DataTypes.INTEGER,
        validate: {
-         notEmpty: {
-           msg: "Please enter a Zip Code"
+         is: {
+           args: [/^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/],// This is regex for an american zip code [/(^\d{5}$)|(^\d{5}-\d{4}$)/],
+           msg: "Please enter a Canadian Zip Code"
          }
        }
      },
