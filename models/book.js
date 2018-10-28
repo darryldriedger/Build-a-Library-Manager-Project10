@@ -8,7 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: {
+        len: {
+          args: [1,25],
           msg: "Please enter a Title"
         }
       }
@@ -16,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
     author: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: {
+        len: {
+          args: [2,20],
           msg: "Please enter an Author"
         }
       }
@@ -24,7 +26,8 @@ module.exports = function(sequelize, DataTypes) {
     genre: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: {
+        len: {
+          args: [3,20],
           msg: "Please enter a Genre"
         }
       }
@@ -32,8 +35,14 @@ module.exports = function(sequelize, DataTypes) {
     first_published: {
       type: DataTypes.INTEGER,
       validate: {
-        notEmpty: {
-          msg: "Please enter a Year (4 digits)"
+         min: 1700,
+         max: 2100,
+        isNumeric: {
+          msg: " Please enter a Year"
+        },
+        len: {
+          args: [4,4],
+          msg: " (input 4 digits)"
         }
       }
     },
