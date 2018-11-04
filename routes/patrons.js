@@ -185,10 +185,11 @@ router.put('/:id', function(req, res, next){
   Patron.findById(req.params.id).then(function(patron){
     return patron.update(req.body);
   }).then(function(patron){
-    res.redirect('/patrons/' + patron.id);
+    res.redirect('/patrons/');
+    // res.redirect('/patrons/' + patron.id);
   }).catch(function(err){
       if(err.name === "SequelizeValidationError") {
-        var errMessage = "Can't submit changes with blank form fields";
+        var errMessage = "Submit changes with valid data(First: 20chars, Last: 20chars, Add: 30chars, email:valid email, LibID: 10chars, Zip: valid Canadian zip)";
         Patron.findAll({
           include: [{ model: Loan, include: [{ model: Book }] }],
         where: {id: req.params.id}

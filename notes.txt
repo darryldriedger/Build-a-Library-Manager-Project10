@@ -54,13 +54,13 @@ PROJECT CHECKLIST
 - homescreen           - done
 - navigation           - done
 - books listing page   - done
-- new books page       - need to validate data in form fields (sequelize model validation)
-- book detail page     - need to validate data in form fields (sequelize model validation)
+- new books page       - done
+- book detail page     - done (quick method)
 - loans listing page   - done
 - new loan page        - need to validate data in form fields (sequelize model validation)
 - return book page     - need to validate data in form fields (sequelize model validation)
 - patrons listing page - done
-- patron detail page   - need to validate data in form fields (sequelize model validation)
-- new patron page      - need to validate data in form fields (sequelize model validation)
+- patron detail page   - done (quick method)
+- new patron page      - done
 
-//finish of the code comments and all of the error handling 
+//finish of the code comments and all of the error handling

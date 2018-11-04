@@ -265,7 +265,7 @@ router.put('/:id', function(req, res, next){
     // res.send(req.body);
   }).catch(function(err){
       if(err.name === "SequelizeValidationError") {
-        var errMessage = "Can't submit changes with blank form fields";
+        var errMessage = "Please submit changes with valid form field data(Title: 50chars,Author: 20chars,Genre: 20chars, Published: 4digits, Year 1700-2100)";
         Book.findAll({
           include: [{ model: Loan, include: [{ model: Patron }] }],
         where: {id: req.params.id}

@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     book_id: {
       type: DataTypes.INTEGER,
       validate: {
-        notEmpty: {
+        len: {
+          args: [1,50],
           msg: "Please choose a Book ID"
         }
       }
@@ -18,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     patron_id: {
       type: DataTypes.INTEGER,
       validate: {
-        notEmpty: {
+        len: {
+          args: [1,40],
           msg: "Please choose a Patron ID"
         }
       }
@@ -27,8 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     loaned_on: {
       type: DataTypes.DATEONLY,
       validate: {
-        notEmpty: {
-          msg: "Please enter a Loaned On Date"
+        isDate: {
+          msg: "Enter a valid Loaned On Date"
+        },
+        len: {
+          args: [6,10],
+          msg: " Proper date format is (YYYY-MM-DD)"
         }
       }
     },
@@ -36,8 +42,12 @@ module.exports = (sequelize, DataTypes) => {
     return_by: {
       type: DataTypes.DATEONLY,
       validate: {
-        notEmpty: {
-          msg: "Please enter a Return By Date"
+        isDate: {
+          msg: "Please enter a valid Return By Date"
+        },
+        len: {
+          args: [6,10],
+          msg: " Proper date format is (YYYY-MM-DD)"
         }
       }
     },
@@ -45,8 +55,12 @@ module.exports = (sequelize, DataTypes) => {
     returned_on: {
       type: DataTypes.DATEONLY,
       validate: {
-        notEmpty: {
-          msg: "Please enter a Returned On Date"
+        isDate: {
+          msg: "Please enter a valid Returned On Date"
+        },
+        len: {
+          args: [6,10],
+          msg: " Proper date format is (YYYY-MM-DD)"
         }
       }
     },

@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate: {
         len: {
-          args: [1,25],
+          args: [1,50],
           msg: "Please enter a Title"
         }
       }

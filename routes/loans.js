@@ -170,7 +170,7 @@ router.post('/new_loan', function(req, res, next) {
     res.redirect("/loans");
   }).catch(function(err){
       if(err.name === "SequelizeValidationError") {
-        var errMessage = "Can't submit with blank form fields";
+        var errMessage = "Please submit changes with valid form field data(Loaned-on/Return-by: year,month,day (YYYY-MM-DD)";
         var books, numBooks;
         var patrons;
         // var currentDate = moment().format('YYYY/MM/DD');
@@ -217,7 +217,7 @@ router.post('/new_loan', function(req, res, next) {
 
 //RETURN BOOK GET
 router.get('/return_book/:id', function(req, res, next) {
-  var currentDate = moment().format('YYYY/MM/DD');
+  var currentDate = moment().format('YYYY-MM-DD');
   Loan.findAll({
     include: [{all: true}],
     where: {
@@ -252,8 +252,8 @@ router.put('/return_book/:id', function(req, res, next){
     // res.send(loan);
   }).catch(function(err){
       if(err.name === "SequelizeValidationError") {
-        var errMessage = "Can't submit with blank form fields";
-        var currentDate = moment().format('YYYY/MM/DD');
+        var errMessage = "Please submit changes with valid form field data(Returned-on: year,month,day (YYYY-MM-DD)";
+        var currentDate = moment().format('YYYY-MM-DD');
         Loan.findAll({
           include: [{all: true}],
           where: {
@@ -264,13 +264,13 @@ router.put('/return_book/:id', function(req, res, next){
             let loanCount = Object.keys(bookInfo).length;
             let returnBook = bookInfo[0];
             console.log(Object.keys(bookInfo).length);
-          res.render('loans/return_book',{
-            title: 'Return Book',
-            loan: returnBook,
-            returned_on: currentDate,
-            errMessage: errMessage
-          });
-          // res.send(bookInfo);
+          // res.render('loans/return_book',{
+          //   title: 'Return Book',
+          //   loan: returnBook,
+          //   returned_on: currentDate,
+          //   errMessage: errMessage
+          // });
+          res.send(err);
         }).catch(function(error){
             res.send(500, error);
          });
