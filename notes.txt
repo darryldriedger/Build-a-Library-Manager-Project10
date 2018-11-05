@@ -15,7 +15,7 @@
 --------------------------------------------------()List checked out: done;
 
 
-Other
+Other notes
 -----
  - work on highlighting the active page button
  - maybe include patron_nav and book_nav in the same pug file
@@ -27,25 +27,17 @@ Other
 
 ERROR/BUG FIXING
 -----
- - dont allow blank fields (error handling) ... loans
- - Dont allow creating the same book name
- - handle the issue of being able to go back to the create loan page and creating another empty loans
- - Dont allow the same Patron id to be used when creating a new patron_nav
+ - fix later == Dont allow creating the same book name
+ - fix later == handle the issue of being able to go back to the create loan page and creating another empty loans
+ - fix later == Dont allow the same Patron id to be used when creating a new patron_nav
 
 
- NOTES
+ NOTES to remember
  -----
 
  library2 database is the original database without the "loan_status" column in books table
  library4 database was working before i changed the dateonly parameter in the model
  *remember - date only fixed my date problem
-
- PRIORITY LIST
- -------------
-
- - error checking empty field for new loans form
- - patron detail empty field specific error checking
- - validate data types in form fields
 
 PROJECT CHECKLIST
 -----------------
@@ -57,10 +49,12 @@ PROJECT CHECKLIST
 - new books page       - done
 - book detail page     - done (quick method)
 - loans listing page   - done
-- new loan page        - need to validate data in form fields (sequelize model validation)
-- return book page     - need to validate data in form fields (sequelize model validation)
+- new loan page        - done (could use some fine tuning)
+- return book page     - done (could use some fine tuning)
 - patrons listing page - done
 - patron detail page   - done (quick method)
 - new patron page      - done
 
-//finish of the code comments and all of the error handling
+//finish of the code comments
+-- and all of the error handling
+//finish all of the catch code

@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
        type: DataTypes.INTEGER,
        validate: {
          is: {
-           args: [/^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/],// This is regex for an american zip code [/(^\d{5}$)|(^\d{5}-\d{4}$)/],
+           args: [/^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/i],// This is regex for an american zip code [/(^\d{5}$)|(^\d{5}-\d{4}$)/],
            msg: "Please enter a Canadian Zip Code"
          }
        }
