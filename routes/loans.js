@@ -264,13 +264,13 @@ router.put('/return_book/:id', function(req, res, next){
             let loanCount = Object.keys(bookInfo).length;
             let returnBook = bookInfo[0];
             console.log(Object.keys(bookInfo).length);
-          // res.render('loans/return_book',{
-          //   title: 'Return Book',
-          //   loan: returnBook,
-          //   returned_on: currentDate,
-          //   errMessage: errMessage
-          // });
-          res.send(err);
+          res.render('loans/return_book',{
+            title: 'Return Book',
+            loan: returnBook,
+            returned_on: currentDate,
+            errMessage: errMessage
+          });
+          // res.send(err);
         }).catch(function(error){
             res.send(500, error);
          });

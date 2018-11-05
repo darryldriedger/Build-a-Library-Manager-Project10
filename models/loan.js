@@ -1,4 +1,10 @@
 'use strict';
+
+
+var moment = require('moment');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 module.exports = (sequelize, DataTypes) => {
   var Loan = sequelize.define('Loan', {
     // id: {
@@ -32,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         isDate: {
           msg: "Enter a valid Loaned On Date"
         },
+        isAfter: moment().subtract(1, 'days').format('YYYY-MM-DD'),
+        isBefore: moment().add(1, 'days').format('YYYY-MM-DD'),
+        notEmpty: true,
         len: {
           args: [6,10],
           msg: " Proper date format is (YYYY-MM-DD)"
@@ -45,6 +54,9 @@ module.exports = (sequelize, DataTypes) => {
         isDate: {
           msg: "Please enter a valid Return By Date"
         },
+        isAfter: moment().format('YYYY-MM-DD'),
+        isBefore: moment().add(8, 'days').format('YYYY-MM-DD'),
+        notEmpty: true,
         len: {
           args: [6,10],
           msg: " Proper date format is (YYYY-MM-DD)"
@@ -58,6 +70,8 @@ module.exports = (sequelize, DataTypes) => {
         isDate: {
           msg: "Please enter a valid Returned On Date"
         },
+        isAfter: moment().subtract(1, 'days').format('YYYY-MM-DD'),
+        notEmpty: true,
         len: {
           args: [6,10],
           msg: " Proper date format is (YYYY-MM-DD)"
