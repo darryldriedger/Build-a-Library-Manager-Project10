@@ -50,3 +50,17 @@ Temporary Items
 
 node_modules
 # config.js
+
+notes.txt
+library.db
+library1.db
+library2.db
+library3.db
+library4.db
+library5.db
+library6.db
+library6_1error.db
+library7.db
+
+package-lock.json
+# Build-a-Library-Manager-Proj-10-Treehouse
