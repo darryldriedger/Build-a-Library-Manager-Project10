@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         len: {
+          //length validations to limit malicious inputs
           args: [1,50],
           msg: "Please choose a Book ID"
         }
@@ -26,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         len: {
+          //length validations to limit malicious inputs
           args: [1,40],
           msg: "Please choose a Patron ID"
         }
@@ -35,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     loaned_on: {
       type: DataTypes.DATEONLY,
       validate: {
+        //date validations make sure it is a date that is basically today (can be changed to a different range)
         isDate: {
           msg: "Enter a valid Loaned On Date"
         },
@@ -42,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         isBefore: moment().add(1, 'days').format('YYYY-MM-DD'),
         notEmpty: true,
         len: {
+          //validates that the length of the date is between 6 and 10 chars
           args: [6,10],
           msg: " Proper date format is (YYYY-MM-DD)"
         }
@@ -51,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     return_by: {
       type: DataTypes.DATEONLY,
       validate: {
+        //date validations make sure it is a date that is basically 7 days from today (can be changed to a different range)
         isDate: {
           msg: "Please enter a valid Return By Date"
         },
@@ -58,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
         isBefore: moment().add(8, 'days').format('YYYY-MM-DD'),
         notEmpty: true,
         len: {
+          //validates that the length of the date is between 6 and 10 chars
           args: [6,10],
           msg: " Proper date format is (YYYY-MM-DD)"
         }
@@ -67,12 +73,14 @@ module.exports = (sequelize, DataTypes) => {
     returned_on: {
       type: DataTypes.DATEONLY,
       validate: {
+        //date validations make sure it is a date that is basically after yesterday (can be changed to a different range)
         isDate: {
           msg: "Please enter a valid Returned On Date"
         },
         isAfter: moment().subtract(1, 'days').format('YYYY-MM-DD'),
         notEmpty: true,
         len: {
+          //validates that the length of the date is between 6 and 10 chars
           args: [6,10],
           msg: " Proper date format is (YYYY-MM-DD)"
         }

@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING,
       validate: {
+        //length validations to limit malicious inputs
         len: {
           args: [1,50],
           msg: "Please enter a Title"
@@ -17,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     author: {
       type: DataTypes.STRING,
       validate: {
+        //length validations to limit malicious inputs
         len: {
           args: [2,20],
           msg: "Please enter an Author"
@@ -27,6 +29,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate: {
         len: {
+          //length validations to limit malicious inputs
           args: [3,20],
           msg: "Please enter a Genre"
         }
@@ -35,12 +38,14 @@ module.exports = function(sequelize, DataTypes) {
     first_published: {
       type: DataTypes.INTEGER,
       validate: {
+        //min and max validations to limit the year inputs from the 1700's to 2100
          min: 1700,
          max: 2100,
         isNumeric: {
           msg: " Please enter a Year"
         },
         len: {
+          //length validations to limit malicious inputs
           args: [4,4],
           msg: " (input 4 digits)"
         }
