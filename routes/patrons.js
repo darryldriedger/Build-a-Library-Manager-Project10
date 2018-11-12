@@ -143,18 +143,6 @@ router.post('/new_patron', function(req, res, next) {
 });
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
-// router.get('/:id', function(req, res, next) {
-//   Patron.findById(req.params.id).then(function(patron){
-//     // res.render('patrons/patron_detail',{patron: patron});
-//     res.send(patron);
-//   }).catch(function(error){
-//       res.send(500, error);
-//    });
-// });
-
-
-//-------------------------------------------------------------
-/* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
   Patron.findAll({
     include: [{ model: Loan, include: [{ model: Book }] }],
@@ -175,11 +163,8 @@ router.get('/:id', function(req, res, next) {
       res.send(500, error);
    });
 });
-//-------------------------------------------------------------
 
-
-
-/* PUT Edit/change book details. PUT PUT PUT PUT PUT  */
+/* PUT Edit/change patron details. PUT PUT PUT PUT PUT  */
 router.put('/:id', function(req, res, next){
   Patron.findById(req.params.id).then(function(patron){
     return patron.update(req.body);
