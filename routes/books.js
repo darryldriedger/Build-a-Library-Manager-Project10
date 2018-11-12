@@ -9,9 +9,12 @@ var moment = require('moment');
 var Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
+//set the limit for how many returned items are to be displayed for pagination
 let limit = 5;
+//sets the page id to books
 let pageId = 'books';
 
+//get all books and set pagination offset to zero
 router.get('/', function(req, res, next) {
   Book.findAndCountAll({
     offset: 0,
@@ -33,6 +36,7 @@ router.get('/', function(req, res, next) {
    });
 });
 
+//get all items by page for pagination
 router.get('/booksPages/:page', function(req, res, next) {
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
@@ -58,6 +62,7 @@ router.get('/booksPages/:page', function(req, res, next) {
    });
 });
 
+//get all items that fit the search query
 router.get('/search/:query', function(req, res, next) {
   var query = req.params.query;
 
@@ -76,6 +81,7 @@ router.get('/search/:query', function(req, res, next) {
       })
 });
 
+//get all checked books and paginate from zero
 router.get('/checked_books', function(req, res, next) {
   Loan.findAndCountAll({
     include: [{ all: true }],
@@ -101,6 +107,7 @@ router.get('/checked_books', function(req, res, next) {
    });
 });
 
+//get books by specified page
 router.get('/checkedbooksPages/:page', function(req, res, next) {
   // This will set the page number according to the page reference in the parameters
   let page = req.params.page;
@@ -130,10 +137,7 @@ router.get('/checkedbooksPages/:page', function(req, res, next) {
    });
 });
 
-//--==========================
-//--==========================
-//--==========================
-
+//get all overdue books and paginate from zero
 router.get('/overdue_books', function(req, res, next) {
 var currentDate = moment().format('YYYY-MM-DD').toString();
 
@@ -167,6 +171,7 @@ Loan.findAndCountAll({
    });
 });
 
+//get all overdue books from the page specified through pagination
 router.get('/overduebooksPages/:page', function(req, res, next) {
 var currentDate = moment().format('YYYY-MM-DD').toString();
   // This will set the page number according to the page reference in the parameters
@@ -202,19 +207,12 @@ var currentDate = moment().format('YYYY-MM-DD').toString();
    });
 });
 
-
-
-//--==========================
-//--==========================
-//--==========================
-
-
-
+//render new book form page
 router.get('/new_book', function(req, res, next) {
   res.render('books/new_book',{title: 'New Book'});
 });
 
-/* POST create article. POST POST POST POST POST */
+/* POST create new book. POST POST POST POST POST */
 router.post('/new_book', function(req, res, next) {
   Book.create(req.body).then(function(book) {
     res.redirect("/books");
@@ -250,10 +248,9 @@ router.post('/new_book', function(req, res, next) {
       } else {
           return next(err);
         }
-  });
-  // .catch(function(error){
-  //     res.send(500, error);
-  //  });
+  }).catch(function(error){
+      res.send(500, error);
+   });
 });
 
 /* PUT Edit/change book details. PUT PUT PUT PUT PUT  */
@@ -269,8 +266,7 @@ router.put('/:id', function(req, res, next){
         Book.findAll({
           include: [{ model: Loan, include: [{ model: Patron }] }],
         where: {id: req.params.id}
-        })
-          .then(function(data){
+        }).then(function(data){
             var bookInfo = JSON.parse(JSON.stringify(data));
             let book = bookInfo[0];
             let loans = book.Loans;
@@ -283,15 +279,10 @@ router.put('/:id', function(req, res, next){
             res.send(500, error);
          });
       }
-
     })
-   //      .catch(function(error){
-   //    console.log("there is a huge 500 error here");
-   //    res.status(500).send(error);
-   // });
 });
 
-/* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
+/* GET individual book details GETiNDIV GETiNDIV GETiNDIV */
 router.get('/:id', function(req, res, next) {
   Book.findAll({
     include: [{ model: Loan, include: [{ model: Patron }] }],

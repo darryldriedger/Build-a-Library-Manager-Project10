@@ -137,10 +137,9 @@ router.post('/new_patron', function(req, res, next) {
       } else {
           return next(err);
         }
-  });
-  // .catch(function(error){
-  //     res.send(500, error);
-  //  });
+  }).catch(function(error){
+      res.send(500, error);
+    })
 });
 
 /* GET incividual book details GETiNDIV GETiNDIV GETiNDIV */
