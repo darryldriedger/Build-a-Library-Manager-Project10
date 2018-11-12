@@ -1,5 +1,5 @@
 # Build a library manager Project 10 - Treehouse tech degree
-============================================================
+----------------------------------------------------------------------------------
 
 ## Created with JavaScript, Node.js, Express, PUG , Sequelize and Sqlite Database.
 ----------------------------------------------------------------------------------
