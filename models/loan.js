@@ -81,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
         len: {
           //validates that the length of the date is between 6 and 10 chars
-          args: [6,10],
+          args: [6,11],
           msg: " Proper date format is (YYYY-MM-DD)"
         }
       }
