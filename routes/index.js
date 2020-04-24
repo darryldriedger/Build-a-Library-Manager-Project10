@@ -5,7 +5,7 @@ var router = express.Router();
 var Book = require("../models").Book;
 var Loans = require("../models").Loans;
 var Patrons = require("../models").Patrons;
-var Qaform = require("../models").Qaform;
+var Qaform = require("../models").Qaforms;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

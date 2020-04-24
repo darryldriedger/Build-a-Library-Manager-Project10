@@ -8,7 +8,6 @@ var connect = require('connect');
 var methodOverride = require('method-override');
 var moment = require('moment');
 const Sequelize = require('sequelize');
-// const chalk = require('chalk');
 // const op = Sequelize.Op;
 // const Op = Sequelize.Op;
 
@@ -47,7 +46,7 @@ app.use('/', homeRoute);
 app.use('/books', booksRoute);
 app.use('/loans', loansRoute);
 app.use('/patrons', patronsRoute);
-app.use('/qaforms', patronsRoute);
+app.use('/qaforms', qaformsRoute);
 //====useROUTES===============================
 
 
