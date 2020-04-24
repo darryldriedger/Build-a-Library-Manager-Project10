@@ -14,11 +14,16 @@ let pageId = 'Qaform'
 
 
 router.get('/', function(req, res, next) {
-  res.render('qaforms/',{title: 'New Form'});
+  res.render('qaforms/',{title: 'QA Forms'});
 });
+
 router.get('/new_form', function(req, res, next) {
     res.render('qaforms/new_form',{title: 'New Form'});
-  });
+});
+
+router.get('/new_form', function(req, res, next) {
+    res.render('qaforms/form1',{title: 'Form 1'});
+});
 
 
 module.exports = router;
