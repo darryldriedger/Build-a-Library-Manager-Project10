@@ -21,7 +21,7 @@ router.get('/new_form', function(req, res, next) {
     res.render('qaforms/new_form',{title: 'New Form'});
 });
 
-router.get('/new_form', function(req, res, next) {
+router.get('/form1', function(req, res, next) {
     res.render('qaforms/form1',{title: 'Form 1'});
 });
 
