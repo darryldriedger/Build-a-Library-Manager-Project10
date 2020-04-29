@@ -14,33 +14,33 @@ a.button, input[type=submit] {
   color: white;
   background: #019875;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
+  /* padding: 10px 14px 12px; */
   font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
-  margin-right: 5px
+  /* margin-right: 5px */
 }
 #searchButton {
   margin-left: 5px;
 }
-form a.button, input[type=submit] {
+/* form a.button, input[type=submit] {
   margin-left: 140px;
-}
+} */
 input[type=submit] {
   border: 0;
 }
   a.button:hover, a.active, input[type=submit]:hover {
     background-color: #01b189;
   }
-p {
+/* p {
   margin: 20px auto;
-}
-ul {
+} */
+/* ul {
   padding: 0;
   list-style-type: none;
   margin-bottom: 10px;
   line-height: 1.3em;
-}
+} */
 nav {
   border-bottom: 2px solid #D8B493;
 }
@@ -59,7 +59,7 @@ h2 {
   border-top: 2px solid #e7e7e7;
   padding-top: 20px;
 }
-th {
+/* th {
   border-bottom: 2px solid #D8B493;
   text-align: left;
   padding: 5px 20px 5px 10px;
@@ -80,12 +80,12 @@ tr:nth-child(2n) {
 }
 td {
   padding: 5px 20px 5px 10px;
-}
-label {
+} */
+/* label {
   font-weight: bold;
   min-width: 130px;
   display: inline-block;
-}
+} */
 input {
   padding: 10px;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -106,20 +106,42 @@ p.error {
   color: red
 }
 
-.container {
+/* .container {
   text-align: center;
   border-color: green;
+} */
+form {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  grid-gap: 16px;
+  /* grid-template-columns: min-content 1fr max-content 1fr; */
+  /* grid-template-rows: 16px; */
+  grid-auto-flow: column;
+  /* grid-auto-columns: 25px; */
+  background-color: pink;
+  border-color: greenyellow;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+}
+label {
+  grid-column: 1 / 2;
 }
 
-.container2 {
+input,
+button {
+  grid-column: 2 / 3;
+}
+/* .container2 { */
   /* grid-template-columns: 40px 50px auto 50px 40px;
   border-color: green;
   grid-template-rows: 25% 100px auto; */
-  grid-template-rows: [row1-start] 25% [row1-end row2-start] 25% [row2-end];
+  /* grid-template-rows: [row1-start] 25% [row1-end row2-start] 25% [row2-end];
   grid-template-columns: repeat(3, 20px [col-start]);
-}
 
-.title {
+} */
+
+/* .title {
   text-align: center;
   border-color: green;
 }
@@ -132,4 +154,4 @@ p.error {
 .subtitle {
   text-align: center;
   border-color: green;
-}
+} */
