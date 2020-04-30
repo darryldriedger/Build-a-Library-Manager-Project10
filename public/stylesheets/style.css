@@ -112,26 +112,27 @@ p.error {
 } */
 form {
   display: grid;
-  grid-template-columns: 200px 1fr 1fr;
+  /* grid-template-columns: 200px 1fr 1fr; */
   grid-gap: 16px;
   /* grid-template-columns: min-content 1fr max-content 1fr; */
   /* grid-template-rows: 16px; */
   grid-auto-flow: column;
-  /* grid-auto-columns: 25px; */
-  background-color: pink;
+  grid-auto-columns: 1fr;
+  /* background-color: pink;
   border-color: greenyellow;
   justify-self: center;
   align-self: center;
-  text-align: center;
+  text-align: center; */
+  grid-template-columns: repeat(4,1fr);
 }
-label {
+/* label {
   grid-column: 1 / 2;
-}
+} */
 
-input,
+/* input,
 button {
   grid-column: 2 / 3;
-}
+} */
 /* .container2 { */
   /* grid-template-columns: 40px 50px auto 50px 40px;
   border-color: green;
